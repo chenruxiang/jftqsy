@@ -59,7 +59,7 @@
     <!--<p id="iTip" style="text-align: center;color: red;"></p>-->
 
     <h3 class="text-center">请登录</h3>
-    <form id="form1" action="${pageContext.request.contextPath}/login" method="post" class=" form-horizontal" role="form">
+    <form id="form1" action="${pageContext.request.contextPath}/admin/login.jsp" method="post" class=" form-horizontal" role="form">
         <div class="form-group">
             <label for="loginName" class="loginN">账户：</label>
             <input type="text" name="loginName" class="form-control" id="loginName" required placeholder="输入账户">
