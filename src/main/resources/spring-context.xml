@@ -3,6 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	   xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
@@ -13,14 +14,19 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
        http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/util/spring-util.xsd
+	    http://www.springframework.org/schema/data/jpa
+		http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
 	<context:annotation-config />
+	<context:component-scan base-package="com.jftshop" />
+	<jpa:repositories base-package="com.jftshop.dao"/>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<bean id="exceptionHandler" class="com.jftshop.exception.JftPayExceptionResolver"/>
 
-	<context:component-scan base-package="com.jftshop" />
 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
@@ -48,17 +54,23 @@
 		<property name="validationQuery" value="${jdbc.validationQuery}"/>
 	</bean>
 
-	<bean id="namedParameterJdbcTemplate"
-		  class="com.jftshop.dao.JFTNamedParameterJdbcTemplate">
-		<constructor-arg ref="dataSource"/>
+	<bean id="entityManagerFactory"
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="packagesToScan" value="com.jftshop.entity"/>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true"/>
+				<property name="showSql" value="true"/>
+			</bean>
+		</property>
 	</bean>
 
+	<!--事务管理器-->
 	<bean id="transactionManager"
-		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
+		  class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 
 </beans>

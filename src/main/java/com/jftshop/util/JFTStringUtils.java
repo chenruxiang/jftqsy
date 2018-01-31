@@ -193,4 +193,19 @@ public class JFTStringUtils {
         return false;
     }
 
+    public static String getString_UrlDecode_UTF8(String value) {
+
+        try {
+            String string = urlHandle(value);
+            if (JFTStringUtils.isEmpty(string)) {
+                return null;
+            } else {
+                return URLDecoder.decode(value, "utf-8");
+            }
+        } catch (Exception e) {
+            LOG.error("URL解码错误:", e);
+            return "";
+        }
+    }
+
 }
