@@ -27,7 +27,6 @@
 
 	<bean id="exceptionHandler" class="com.jftshop.exception.JftPayExceptionResolver"/>
 
-
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<util:properties id="systemprop" location="classpath:system.properties"/>
@@ -70,6 +69,23 @@
 	<bean id="transactionManager"
 		  class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="cacheSeconds" value="3600"/>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true"/>
+		<property name="basenames">
+			<list>
+				<value>classpath:language/shop/message</value>
+			</list>
+		</property>
 	</bean>
 
 

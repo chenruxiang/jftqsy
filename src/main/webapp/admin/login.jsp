@@ -1,13 +1,51 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ThinkPad
-  Date: 2017/5/12
-  Time: 10:46
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%String path = request.getContextPath();%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="com.jftshop.util.SpringUtils"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
+<%
+    String path = request.getContextPath();
+    String base = request.getContextPath();
+    ApplicationContext applicationContext = SpringUtils.getApplicationContext();
+
+    if (applicationContext != null) {
+%>
+
+<shiro:authenticated>
+    <%
+        response.sendRedirect(base + "/admin/common/main.jhtml");
+    %>
+</shiro:authenticated>
+
+<%
+    }
+%>
+
+<%
+    String message = null;
+    if (applicationContext != null) {
+
+        String loginFailure = (String) request.getAttribute("shiroLoginFailure");
+        if (loginFailure != null) {
+            if (loginFailure.equals("org.apache.shiro.authc.pam.UnsupportedTokenException")) {
+                message = "x1";
+            } else if (loginFailure.equals("org.apache.shiro.authc.UnknownAccountException")) {
+                message = "x2";
+            } else if (loginFailure.equals("org.apache.shiro.authc.DisabledAccountException")) {
+                message = "x3";
+            } else if (loginFailure.equals("org.apache.shiro.authc.LockedAccountException")) {
+                message = "x4";
+            } else if (loginFailure.equals("org.apache.shiro.authc.IncorrectCredentialsException")) {
+                message ="x5";
+            } else if (loginFailure.equals("org.apache.shiro.authc.AuthenticationException")) {
+                message = "x6";
+            }
+        }
+
+    }
+%>
+
 <html>
 <head>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

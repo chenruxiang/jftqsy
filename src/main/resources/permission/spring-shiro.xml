@@ -49,7 +49,7 @@
 		<property name="usernameParam" value="loginName" />
 		<property name="passwordParam" value="pwd" />
 		<property name="rememberMeParam" value="rememberMe" />
-		<property name="loginUrl" value="/admin/login.jsp" />
+		<property name="loginUrl" value="/Member/login.jsp" />
 		<property name="failureKeyAttribute" value="shiroLoginFailure" />
 	</bean>
 
@@ -65,9 +65,9 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- 登录controller的mapper地址 -->
-		<property name="loginUrl" value="/admin/login.jsp" />
-		<property name="unauthorizedUrl" value="/admin/login.jsp" />
-		<property name="successUrl" value="/admin/main.jsp" />
+		<property name="loginUrl" value="/Member/login.jsp" />
+		<property name="unauthorizedUrl" value="/Member/login.jsp" />
+		<property name="successUrl" value="/Member/main.jsp" />
 		<property name="filters">
 			<util:map>
 				<entry key="authc" value-ref="authcFilter" />
@@ -78,10 +78,10 @@
 			<value>
 				<!-- Shiro的Web过滤器 -->
 				/captcha* = anon
-				/admin/unauthorized.jsp = anon
-				/admin/logout = logout
-				/admin/login.jsp = captchaValidate,authc
-				/admin/** = authc
+				/Member/unauthorized.jsp = anon
+				/Member/logout = logout
+				/Member/login.jsp = captchaValidate,authc
+				/Member/** = authc
 			</value>
 		</property>
 	</bean>

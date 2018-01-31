@@ -5,6 +5,8 @@ import com.jftpay.permission.entity.PmsOperator;
 import com.jftpay.permission.service.PmsOperatorService;*/
 
 
+import com.jftshop.entity.Admin;
+import com.jftshop.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -17,6 +19,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 
@@ -89,32 +92,18 @@ public class OperatorRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();// 没找到帐号
 		}
 
-/*		// 根据登录名查询操作员
-		PmsOperator operator = pmsOperatorService.findOperatorByLoginName(loginName);
-
-		LOG.debug("operator={}",operator);
-		LOG.debug("getLogin_name={}",operator.getLogin_name());
-		LOG.debug("getLogin_pwd={}",operator.getLogin_pwd());
-		LOG.debug("getSalt={}",operator.getCredentialsSalt());
-
-		if (operator == null) {
+		Admin admin = adminService.findByUsername( loginName );
+		if (admin == null) {
 			throw new UnknownAccountException();// 没找到帐号
-		}*/
+		}
 
-/*		if (PublicConstant.UNACTIVE.equals(operator.getStatus())) {
-			throw new LockedAccountException(); // 帐号锁定
-		}*/
+		LOG.debug("getUsername={}",admin.getUsername());
+		LOG.debug("getPassword={}",admin.getPassword());
+		LOG.debug("getCredentialsSalt={}",admin.getCredentialsSalt());
 
-		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-/*		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(operator.getLogin_name(), // 登录名
-				operator.getLogin_pwd(), // 密码
-				ByteSource.Util.bytes(operator.getCredentialsSalt()), // salt=username+salt
-				getName() // realm name
-		);*/
-
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo("admin", // 登录名
-				"0ec82a496db653ee3585bbc5ce61d604", // 密码
-				ByteSource.Util.bytes("admin100319a431619710704fb054beff402b"), // salt=username+salt
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo( admin.getUsername(), // 登录名
+				admin.getPassword(), // 密码
+				ByteSource.Util.bytes(admin.getCredentialsSalt()), // salt=username+salt
 				getName() // realm name
 		);
 
@@ -148,5 +137,8 @@ public class OperatorRealm extends AuthorizingRealm {
 		clearAllCachedAuthenticationInfo();
 		clearAllCachedAuthorizationInfo();
 	}
+
+	@Autowired
+	private AdminService adminService;
 
 }
