@@ -8,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
@@ -27,6 +29,10 @@ public class TestMember {
         member.setEmail("jjj@163.com");
 
         memberRepository.save( member );
+
+        List<Member> list = memberRepository.findByUsername( "hello234" );
+
+        System.out.println("---------------------->" + list.size() );
 
     }
 

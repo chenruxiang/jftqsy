@@ -26,7 +26,7 @@ public class RegisterController extends BaseController {
 
     @RequestMapping(value = {"/submit"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
     @ResponseBody
-    public Message submit(Member member , String captchaCode, String username, String email, String password,
+    public Message submit(Member member , String captcha, String username, String email, String password,
                           HttpServletRequest request, HttpServletResponse response, HttpSession session)
     {
 

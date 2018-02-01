@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="shiro"
-           uri="http://shiro.apache.org/tags" %>
+                                   pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.Random" %>
-<%@ page import="com.jftpay.JFTServiceDelegate" %>
-<%@ page import="com.jftpay.permission.entity.PmsOperator" %>
+
 <%@ page import="org.apache.shiro.SecurityUtils" %>
-<% String path = request.getContextPath();
- PmsOperator pmsOperator = (PmsOperator) SecurityUtils.getSubject().getSession().getAttribute("PmsOperator"); %>
-<!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<% String path = request.getContextPath();%>
+
+
 <!-- Bootstrap 3.3.6 -->
 <link href="<%=path%>/common/jftw.jpg" rel="shortcut icon" type="image/x-icon" />
 
@@ -52,6 +49,8 @@
 <script src="<%=path%>/common/js/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=path%>/common/js/lte/dist/js/app.js"></script>
+<!-- 校验 -->
+<script src="<%=path%>/common/js/lte/plugins/validate/jquery.validate.js"></script>
 
 <!-- 引入HTML模板 -->
 <%@include file="tmpl.jsp"%>
@@ -73,7 +72,6 @@
 <script src="<%=path%>/common/js/jquery.form.js"></script>
 
 <script type="text/javascript" src="<%=path%>/common/jedate/jedate.js"></script>
-
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -133,6 +131,7 @@
 </div>
 
 <script type="text/javascript">
+
       function saveClick(){
           var data = $("#relogin").serialize();
           $.ajax({

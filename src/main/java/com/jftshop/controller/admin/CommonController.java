@@ -15,14 +15,11 @@ public class CommonController {
 
     private    static final Logger LOG = LoggerFactory.getLogger(CommonController.class);
 
-/*
+
     @RequestMapping(value={"/main"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
-    public String main()
-    {
-        LOG.debug(" ------> /admin/main" );
+    public String main() {
+        LOG.debug(" ------> /admin/main");
         return "admin/main";
     }
-*/
-
 
 }
