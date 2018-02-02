@@ -8,6 +8,7 @@ import com.jftshop.util.JFTBeanUtils;
 import com.jftshop.util.JFTStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping({"/register"})
 public class RegisterController extends BaseController {
 
-    @RequestMapping(value = {"/submit"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
+    @PostMapping({"/submit"})
     @ResponseBody
     public Message submit(Member member , String captcha, String username, String email, String password,
                           HttpServletRequest request, HttpServletResponse response, HttpSession session)
@@ -48,8 +49,9 @@ public class RegisterController extends BaseController {
 
         memberService.save( localMember );
 
-        return Message.success("shop.register.success", new Object[0]);
+        Message message =  Message.success("shop.register.success", new Object[0]);
 
+        return message;
      }
 
     @Autowired
