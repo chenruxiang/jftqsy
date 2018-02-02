@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
 <%@ include file="/common/lte.jsp"%>
 
+MMMM
 
 <script type="text/javascript">
+
+
     $().ready(function() {
 
     var $registerForm = $("#registerForm");
@@ -44,10 +48,11 @@
                 pattern: "password1"
             }
         },
+
         submitHandler: function(form) {
             $.ajax({
                 url: $registerForm.attr("action"),
-                type: "POST",
+                type: "post",
                 data: {
                     username: $username.val(),
                     password: $password.val(),
@@ -59,15 +64,16 @@
                 beforeSend: function() {
                     $submit.prop("disabled", true);
                 },
-                success:submit_success(message)
+                success:submit_success
              });
         }
     });
 
 
      var submit_success = function(message) {
-        $.message(message);
+
         if (message.type == "success") {
+            alert(message.content);
             window.setTimeout(function() {
                 $submit.prop("disabled", false);
                 location.href = "<%=path%>/";
@@ -108,7 +114,7 @@
     <img src="<%=path%>/captcha.jpg" width="65" height="24"/>
     <br>
 
-    <input type="submit" class="submit" value="提交">
+    <input type="submit"  value="提交">
 
 </form>
 
