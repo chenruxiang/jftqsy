@@ -31,7 +31,7 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="<%=path%>/common/js/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="<%=path%>/common/js/lte/plugins/datatables/buttons/jquery-1.12.4.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="<%=path%>/common/js/lte/plugins/jQueryUI/jquery-ui.min.js"></script>
 
