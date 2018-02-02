@@ -237,7 +237,13 @@
       </dependency>
 
 
-      <!-- Spring libs end -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+
+
+    <!-- Spring libs end -->
   </dependencies>
 
   <build>
