@@ -132,7 +132,7 @@
 
     <div class="content-wrapper">
         <div id="welcome_div">
-            <iframe src="<%=path%>/welcome" scrolling="yes" frameborder="yes" ></iframe>
+            <iframe src="<%=path%>/admin/welcome.jsp" scrolling="yes" frameborder="yes" ></iframe>
         </div>
         <div id="myaddTab" style="width: 100%;height:100%;">
             <ul id="myTab" class="nav nav-tabs" >
@@ -162,7 +162,7 @@
                         <div class="row">
                             <label for="loginName" class="col-sm-6 control-label">账户：</label>
                             <div class="col-sm-6">
-                                <input type="text" value="${pmsOperator.login_name}" name="loginName" class="form-control" id="loginName" required placeholder="" readonly="readonly">
+                                <input type="text" value="" name="loginName" class="form-control" id="loginName" required placeholder="" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -217,6 +217,7 @@
 
 
 <script>
+
     //显示系统当前时间
     window.onload = function(){
         showTime();
@@ -259,8 +260,9 @@
 
     $(document).ready(function(){
 
+        //菜单
         var menu = [
-            {"name":"menu1","url":"#","submenu":[{"name":"menu1","url":"#"}]},
+            {"name":"商品","url":"#","submenu":[{"name":"商品管理","url":"#"}]},
             {"name":"menu1","url":"#","submenu":[{"name":"menu1","url":"#"}]}
         ]
 
