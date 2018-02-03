@@ -37,6 +37,24 @@ CREATE TABLE `member` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table member comment '会员';
 
+
+CREATE TABLE `product_category` (
+  `id` varchar(255) NOT NULL,
+  `create_date` datetime NOT NULL default '0',
+  `modify_date` datetime DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `grade` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `seo_description` varchar(255) DEFAULT NULL,
+  `seo_keywords` varchar(255) DEFAULT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `tree_path` varchar(255) NOT NULL,
+  `parent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK1B7971ADFBDD5B73` (`parent`),
+  CONSTRAINT `FK1B7971ADFBDD5B73` FOREIGN KEY (`parent`) REFERENCES `xx_product_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 
