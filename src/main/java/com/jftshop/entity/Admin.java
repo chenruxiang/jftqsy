@@ -34,6 +34,7 @@ public class Admin extends  BaseEntity {
         return username + salt;
     }
 
+
     public String getId() {
         return id;
     }

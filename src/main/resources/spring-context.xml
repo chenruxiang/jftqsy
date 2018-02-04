@@ -59,9 +59,18 @@
 		<property name="packagesToScan" value="com.jftshop.entity"/>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="generateDdl" value="true"/>
+				<property name="generateDdl" value="false"/>
 				<property name="showSql" value="true"/>
 			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.connection.isolation">3</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+
+			</props>
 		</property>
 	</bean>
 

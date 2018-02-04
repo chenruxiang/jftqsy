@@ -28,6 +28,7 @@ public class Member extends  BaseEntity  {
     protected String mobile;
     protected String phone;
 
+
     public String getId() {
         return id;
     }

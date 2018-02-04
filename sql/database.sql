@@ -52,9 +52,8 @@ CREATE TABLE `product_category` (
   `seo_title` varchar(255) DEFAULT NULL,
   `tree_path` varchar(255) NOT NULL,
   `parent` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK1B7971ADFBDD5B73` (`parent`),
-  CONSTRAINT `FK1B7971ADFBDD5B73` FOREIGN KEY (`parent`) REFERENCES `xx_product_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_category comment '目录';
 
 

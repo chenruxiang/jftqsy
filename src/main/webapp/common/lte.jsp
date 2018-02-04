@@ -4,7 +4,6 @@
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.Random" %>
 
-<%@ page import="org.apache.shiro.SecurityUtils" %>
 <% String path = request.getContextPath();%>
 
 

@@ -3,7 +3,7 @@
 
 <%@ include file="/common/lte.jsp"%>
 
-MMMM
+
 
 <script type="text/javascript">
 
