@@ -64,6 +64,8 @@ public class Admin extends  BaseEntity {
         return isenabled;
     }
 
+
+
     public void setIsenabled(boolean isenabled) {
         this.isenabled = isenabled;
     }
@@ -72,7 +74,7 @@ public class Admin extends  BaseEntity {
         return islocked;
     }
 
-    public void setIsLocked(boolean islocked) {
+    public void setIslocked(boolean islocked) {
         this.islocked = islocked;
     }
 
@@ -88,7 +90,7 @@ public class Admin extends  BaseEntity {
         return logindate;
     }
 
-    public void setLoginDate(String logindate) {
+    public void setLogindate(String logindate) {
         this.logindate = logindate;
     }
 

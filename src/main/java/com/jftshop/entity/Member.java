@@ -18,7 +18,7 @@ import javax.validation.constraints.Pattern;
 @Table(name = "member")
 public class Member extends  BaseEntity  {
 
-    @Id
+
     protected String id;
     protected String username;
     protected String name;
@@ -28,7 +28,7 @@ public class Member extends  BaseEntity  {
     protected String mobile;
     protected String phone;
 
-
+    @Id
     public String getId() {
         return id;
     }

@@ -38,8 +38,8 @@ function refresh(){
             var id = data[index][0];
             var name = data[index][5];
             var parent = data[index][10];
-            if ( parent == null ) {
-                $("#draw").append( name +"&nbsp;&nbsp;&nbsp;id:" +  id);
+            if ( parent == null  || parent == '') {
+                $("#draw").append( "<br>" + name +"&nbsp;&nbsp;&nbsp;id:" +  id);
                 iterator( data   , id );
             }
         });
@@ -51,10 +51,11 @@ function refresh(){
 
 function iterator( data , parentid ) {
     jQuery.each( data, function(index) {
+        var id = data[index][0];
        var parent = data[index][10];
         var name = data[index][5];
         if ( parent == parentid ){
-            $("#draw").append( "<br>&nbsp&nbsp&nbsp"+ name );
+            $("#draw").append( "<br>&nbsp&nbsp&nbsp"+ name +"&nbsp;&nbsp;&nbsp;id:" +  id);
         }
     });
 }
