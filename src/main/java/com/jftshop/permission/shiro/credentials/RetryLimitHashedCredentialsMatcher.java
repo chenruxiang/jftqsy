@@ -1,5 +1,6 @@
 package com.jftshop.permission.shiro.credentials;
 
+import com.jftshop.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,6 +12,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,8 +21,8 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 
 	private static final Logger LOG = LoggerFactory.getLogger(RetryLimitHashedCredentialsMatcher.class);
 
-/*	@Autowired
-	private PmsOperatorService pmsOperatorService;*/
+	@Autowired
+	private AdminService adminService;
 
 	private Cache<String, AtomicInteger> passwordRetryCache;
 
@@ -35,11 +37,9 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
 
 		String username = (String) token.getPrincipal();
-        //UsernamePasswordToken token2 = new UsernamePasswordToken("admin", "123456");
 
         LOG.debug("username={}",username);
 
-		// retry count + 1
 		AtomicInteger retryCount = passwordRetryCache.get(username);
 		if (retryCount == null) {
 			retryCount = new AtomicInteger(0);
@@ -62,10 +62,13 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 			//PmsOperator operator = pmsOperatorService.findOperatorByLoginName(username);
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();
-			session.setAttribute("PmsOperator", "admin");
-			LOG.debug("operator={}","admin");
+
+			session.setAttribute("operator", username);
+			LOG.debug("operator={}",username);
 		}
 
 		return matches;
 	}
+
+
 }

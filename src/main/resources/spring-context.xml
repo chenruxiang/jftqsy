@@ -27,7 +27,6 @@
 
 	<bean id="exceptionHandler" class="com.jftshop.exception.JftPayExceptionResolver"/>
 
-
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<util:properties id="systemprop" location="classpath:system.properties"/>
@@ -60,9 +59,18 @@
 		<property name="packagesToScan" value="com.jftshop.entity"/>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="generateDdl" value="true"/>
+				<property name="generateDdl" value="false"/>
 				<property name="showSql" value="true"/>
 			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.connection.isolation">3</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+
+			</props>
 		</property>
 	</bean>
 
@@ -70,6 +78,27 @@
 	<bean id="transactionManager"
 		  class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+		<property name="defaultLocale" value="zh_CN"/>
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="cacheSeconds" value="3600"/>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true"/>
+		<property name="basenames">
+			<list>
+				<value>classpath:language/shop/message</value>
+			</list>
+		</property>
 	</bean>
 
 

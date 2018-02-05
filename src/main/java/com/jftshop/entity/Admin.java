@@ -3,6 +3,7 @@ package com.jftshop.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Created by ThinkPad on 2018/1/30.
@@ -25,6 +26,14 @@ public class Admin extends  BaseEntity {
     protected String login_ip;
     protected String username;
     protected String password;
+
+    @Transient
+    private String salt="100319a431619710704fb054beff402b";
+
+    public String getCredentialsSalt(){
+        return username + salt;
+    }
+
 
     public String getId() {
         return id;

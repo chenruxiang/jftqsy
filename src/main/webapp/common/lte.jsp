@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="shiro"
-           uri="http://shiro.apache.org/tags" %>
+                                   pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.Random" %>
+
 <% String path = request.getContextPath();%>
-<!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
 <!-- Bootstrap 3.3.6 -->
 <link href="<%=path%>/common/jftw.jpg" rel="shortcut icon" type="image/x-icon" />
 
@@ -30,7 +30,7 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="<%=path%>/common/js/lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="<%=path%>/common/js/lte/plugins/datatables/buttons/jquery-1.12.4.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="<%=path%>/common/js/lte/plugins/jQueryUI/jquery-ui.min.js"></script>
 
@@ -48,6 +48,8 @@
 <script src="<%=path%>/common/js/lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=path%>/common/js/lte/dist/js/app.js"></script>
+<!-- 校验 -->
+<script src="<%=path%>/common/js/lte/plugins/validate/jquery.validate.js"></script>
 
 <!-- 引入HTML模板 -->
 <%@include file="tmpl.jsp"%>
@@ -69,7 +71,6 @@
 <script src="<%=path%>/common/js/jquery.form.js"></script>
 
 <script type="text/javascript" src="<%=path%>/common/jedate/jedate.js"></script>
-
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -129,6 +130,7 @@
 </div>
 
 <script type="text/javascript">
+
       function saveClick(){
           var data = $("#relogin").serialize();
           $.ajax({
