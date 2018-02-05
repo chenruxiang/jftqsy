@@ -8,5 +8,10 @@ public interface ProductCategoryService {
 
     public List<ProductCategory> findTree();
 
-    public List<ProductCategory> findAll();
+    public List<Object[]> listAll();
+
+    public  ProductCategory getOne( String id );
+
+    public  ProductCategory save( ProductCategory productCategory );
+
 }

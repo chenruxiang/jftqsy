@@ -1,9 +1,5 @@
-import com.jftshop.dao.MemberRepository;
 import com.jftshop.dao.ProductCategoryRepository;
-import com.jftshop.entity.Member;
-import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.ProductCategoryService;
-import com.jftshop.util.JFTStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +53,7 @@ public class TestproductCategory {
     @Transactional
     public void  test2() throws Exception {
 
+/*
         List<ProductCategory> list = productCategoryService.findTree();
 
 
@@ -68,6 +65,11 @@ public class TestproductCategory {
 
 
         System.out.println("---------------------->" + pc.getChildren().size() );
+*/
+
+        List<Object[]> list = productCategoryRepository.listAll();
+
+        System.out.println("---------------------->" + list.size() );
 
     }
 
