@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping({"/admin"})
 public class CommonController {
 
-    private    static final Logger LOG = LoggerFactory.getLogger(CommonController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CommonController.class);
 
 /*
     @RequestMapping(value={"/main"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})

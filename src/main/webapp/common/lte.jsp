@@ -4,11 +4,7 @@
            uri="http://shiro.apache.org/tags" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.Random" %>
-<%@ page import="com.jftpay.JFTServiceDelegate" %>
-<%@ page import="com.jftpay.permission.entity.PmsOperator" %>
-<%@ page import="org.apache.shiro.SecurityUtils" %>
-<% String path = request.getContextPath();
- PmsOperator pmsOperator = (PmsOperator) SecurityUtils.getSubject().getSession().getAttribute("PmsOperator"); %>
+<% String path = request.getContextPath();%>
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Bootstrap 3.3.6 -->
