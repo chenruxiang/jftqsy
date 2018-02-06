@@ -24,13 +24,7 @@ public class ProductCategory  extends  BaseEntity  {
     private Integer orders;
     private ProductCategory parent;
     private Set<ProductCategory> children = new HashSet();
-    //private Set<ParameterGroup> IIlIIllI = new HashSet();
     private Set<Attribute> attributes = new HashSet();
-
-    public ProductCategory(){
-        super();
-    }
-
 
     @Id
     public String getId() {
@@ -123,7 +117,7 @@ public class ProductCategory  extends  BaseEntity  {
         return this.children;
     }
 
-    public void setChildren(Set<ProductCategory> children)
+    public void setChildren(Set<ProductCategory> attribute)
     {
         this.children = children;
     }
@@ -131,14 +125,14 @@ public class ProductCategory  extends  BaseEntity  {
 
     @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
     @JsonIgnore
-    public Set<Attribute> getAttribute()
+    public Set<Attribute> getAttributes()
     {
-        return this.attribute;
+        return this.attributes;
     }
 
-    public void setChildren(Set<Attribute> attribute)
+    public void setAttributes(Set<Attribute> attributes)
     {
-        this.children = children;
+        this.attributes = attributes;
     }
 
 

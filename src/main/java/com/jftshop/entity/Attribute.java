@@ -4,9 +4,11 @@ package com.jftshop.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="attribute")
+@Table(name = "attribute")
 public class Attribute extends  BaseEntity {
 
     private String id;
@@ -14,7 +16,7 @@ public class Attribute extends  BaseEntity {
     private String name;
     private Integer propertyindex;
     private ProductCategory productcategory;
-
+    private Set<AttributeOption> attributeOptions = new HashSet();
 
     @Id
     public String getId() {
@@ -57,9 +59,27 @@ public class Attribute extends  BaseEntity {
         return this.productcategory;
     }
 
-    public void setProductCategory(ProductCategory productcategory)
+    public void setProductcategory(ProductCategory productcategory)
     {
         this.productcategory = productcategory;
+    }
+
+
+    @OneToMany(mappedBy="attribute", fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    @JsonIgnore
+    public Set<AttributeOption> getAttributeOptions()
+    {
+        return this.attributeOptions;
+    }
+
+    public void setAttributeOptions(Set<AttributeOption> attributeOptions)
+    {
+        this.attributeOptions = attributeOptions;
+    }
+
+    public void addAttributeOption(AttributeOption attributeOption)
+    {
+        this.attributeOptions.add( attributeOption );
     }
 
 }
