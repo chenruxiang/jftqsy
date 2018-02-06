@@ -1,4 +1,4 @@
-import com.jftshop.dao.ProductCategoryRepository;
+import com.jftshop.dao.ProductRepository;
 import com.jftshop.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class TestproductCategory {
 
 
     @Autowired
-    ProductCategoryRepository productCategoryRepository;
+    ProductRepository productRepository;
 
     @Autowired
     ProductService productCategoryService;
@@ -67,7 +67,7 @@ public class TestproductCategory {
         System.out.println("---------------------->" + pc.getChildren().size() );
 */
 
-        List<Object[]> list = productCategoryRepository.listAllCategory();
+        List<Object[]> list = productRepository.listAllCategory();
 
         System.out.println("---------------------->" + list.size() );
 

@@ -1,7 +1,7 @@
 package com.jftshop.service.impl;
 
 
-import com.jftshop.dao.ProductCategoryRepository;
+import com.jftshop.dao.ProductRepository;
 import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Autowired
-    ProductCategoryRepository productRepository;
+    ProductRepository productRepository;
 
     @Transactional(readOnly=true)
     public  List<Object[]> listAllCategory(){
