@@ -1,16 +1,16 @@
-package com.jftshop.service;
+package com.jftshop.service.product;
 
 import com.jftshop.entity.ProductCategory;
 
 import java.util.List;
 
-public interface ProductService {
+public interface CategoryService {
 
     public List<ProductCategory> findTree();
 
-    public List<Object[]> listAllCategory();
+    public List<Object[]> listAll();
 
-    public  ProductCategory getProductCategory( String id );
+    public  ProductCategory getOne( String id );
 
     public  ProductCategory save( ProductCategory productCategory );
 
