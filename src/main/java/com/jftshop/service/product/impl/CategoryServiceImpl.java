@@ -1,4 +1,4 @@
-package com.jftshop.service.impl.product;
+package com.jftshop.service.product.impl;
 
 
 import com.jftshop.dao.product.CategoryRepository;
