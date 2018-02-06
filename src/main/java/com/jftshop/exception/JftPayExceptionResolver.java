@@ -19,6 +19,8 @@ public class JftPayExceptionResolver implements HandlerExceptionResolver {
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
+        LOG.debug( "------------------->{}",ex.getMessage() );
+
         //如果是业务异常类
         if (BizException.class.isAssignableFrom(ex.getClass())) {
             BizException bizException = (BizException) ex;

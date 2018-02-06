@@ -262,7 +262,7 @@
 
         //菜单
         var menu = [
-            {"name":"商品","url":"#","submenu":[{"name":"商品分类","url":"<%=path%>/admin/product_category/list"}]},
+            {"name":"商品","url":"#","submenu":[{"name":"商品分类","url":"<%=path%>/admin/product_category/list.jsp"}]},
             {"name":"menu1","url":"#","submenu":[{"name":"menu1","url":"#"}]}
         ]
 

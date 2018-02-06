@@ -19,9 +19,20 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     ProductCategoryRepository productCategoryRepository;
 
     @Transactional(readOnly=true)
-    public  List<ProductCategory> findAll(){
-        return  productCategoryRepository.findAll();
+    public  List<Object[]> listAll(){
+        return  productCategoryRepository.listAll();
     }
+
+    @Transactional(readOnly=true)
+    public  ProductCategory getOne( String id ){
+        return  productCategoryRepository.getOne( id );
+    }
+
+    @Transactional
+    public  ProductCategory save( ProductCategory productCategory ){
+        return  productCategoryRepository.save( productCategory );
+    }
+
 
     @Transactional(readOnly=true)
     public  List<ProductCategory> findTree(){

@@ -3,6 +3,7 @@ package com.jftshop.entity;
 import com.jftshop.util.JFTBeanUtils;
 import com.jftshop.util.JFTStringUtils;
 
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
@@ -10,28 +11,30 @@ import java.util.Map;
 
 
 
-
+@MappedSuperclass
 public abstract class BaseEntity  implements Serializable {
 
 
-	protected  Date create_date =  new Date()  ;// 创建时间.
-	protected  Date modify_date;// 修改时间.
+	private  Date createdate =  new Date() ;// 创建时间.
+	private  Date modifydate;// 修改时间.
 
-	public Date getCreate_date() {
-		return create_date;
+	public Date getCreatedate() {
+		return createdate;
 	}
 
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public void setCreatedate(Date createdate) {
+		this.createdate = createdate;
 	}
 
-	public Date getModify_date() {
-		return modify_date;
+	public Date getModifydate() {
+		return modifydate;
 	}
 
-	public void setModify_date(Date modify_date) {
-		this.modify_date = modify_date;
+	public void setModifydate(Date modifydate) {
+		this.modifydate = modifydate;
 	}
+
+
 
 	public Map<String,String> toMap( ){
 		return JFTBeanUtils.toMap( this );

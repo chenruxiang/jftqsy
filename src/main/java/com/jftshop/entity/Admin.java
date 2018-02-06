@@ -13,28 +13,29 @@ import javax.persistence.Transient;
 @Table(name = "admin")
 public class Admin extends  BaseEntity {
 
-    @Id
-    protected String id;
 
-    protected String department;
-    protected String email;
-    protected boolean is_enabled;
-    protected boolean is_locked;
-    protected String locked_date;
-    protected String login_date;
-    protected int login_failure_count;
-    protected String login_ip;
-    protected String username;
-    protected String password;
+    private String id;
 
-    @Transient
+    private String department;
+    private String email;
+    private boolean isenabled;
+    private boolean islocked;
+    private String lockeddate;
+    private String logindate;
+    private int loginfailurecount;
+    private String loginip;
+    private String username;
+    private String password;
+
+
     private String salt="100319a431619710704fb054beff402b";
 
+    @Transient
     public String getCredentialsSalt(){
         return username + salt;
     }
 
-
+    @Id
     public String getId() {
         return id;
     }
@@ -59,52 +60,54 @@ public class Admin extends  BaseEntity {
         this.email = email;
     }
 
-    public boolean is_enabled() {
-        return is_enabled;
+    public boolean getIsenabled() {
+        return isenabled;
     }
 
-    public void setIs_enabled(boolean is_enabled) {
-        this.is_enabled = is_enabled;
+
+
+    public void setIsenabled(boolean isenabled) {
+        this.isenabled = isenabled;
     }
 
-    public boolean is_locked() {
-        return is_locked;
+    public boolean getIslocked() {
+        return islocked;
     }
 
-    public void setIs_locked(boolean is_locked) {
-        this.is_locked = is_locked;
+    public void setIslocked(boolean islocked) {
+        this.islocked = islocked;
     }
 
-    public String getLocked_date() {
-        return locked_date;
+    public String getLockeddate() {
+        return lockeddate;
     }
 
-    public void setLocked_date(String locked_date) {
-        this.locked_date = locked_date;
+    public void setLockeddate(String lockeddate) {
+        this.lockeddate = lockeddate;
     }
 
-    public String getLogin_date() {
-        return login_date;
+    public String getLogindate() {
+        return logindate;
     }
 
-    public void setLogin_date(String login_date) {
-        this.login_date = login_date;
+    public void setLogindate(String logindate) {
+        this.logindate = logindate;
     }
 
-    public int getLogin_failure_count() {
-        return login_failure_count;
+    public int getLoginfailurecount() {
+        return loginfailurecount;
     }
 
-    public void setLogin_failure_count(int login_failure_count) {
-        this.login_failure_count = login_failure_count;
+    public void setLoginfailurecount(int login_failure_count) {
+        this.loginfailurecount = loginfailurecount;
     }
 
-    public String getLogin_ip() {
-        return login_ip;
+    public String getLoginip() {
+        return loginip;
     }
 
-    public void setLogin_ip(String login_ip) {
-        this.login_ip = login_ip;
+    public void setLoginip(String login_ip) {
+        this.loginip = login_ip;
     }
 
     public String getUsername() {

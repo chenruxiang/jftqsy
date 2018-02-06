@@ -1,6 +1,7 @@
 package com.jftshop.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -15,14 +16,20 @@ public class ProductCategory  extends  BaseEntity  {
 
     private String id;
     private String name;
-    private String seoTitle;
-    private String seoKeywords;
-    private String seoDescription;
-    private String treePath;
+    private String seotitle;
+    private String seokeywords;
+    private String seodescription;
+    private String treepath;
     private Integer grade;
     private Integer orders;
     private ProductCategory parent;
     private Set<ProductCategory> children = new HashSet();
+    //private Set<ParameterGroup> IIlIIllI = new HashSet();
+    private Set<Attribute> attributes = new HashSet();
+
+    public ProductCategory(){
+        super();
+    }
 
 
     @Id
@@ -46,37 +53,37 @@ public class ProductCategory  extends  BaseEntity  {
     }
 
     @Length(max=200)
-    public String getSeoTitle() {
-        return seoTitle;
+    public String getSeotitle() {
+        return seotitle;
     }
 
-    public void setSeoTitle(String seoTitle) {
-        this.seoTitle = seoTitle;
+    public void setSeotitle(String seoTitle) {
+        this.seotitle = seotitle;
     }
 
     @Length(max=200)
-    public String getSeoKeywords() {
-        return seoKeywords;
+    public String getSeokeywords() {
+        return seokeywords;
     }
 
-    public void setSeoKeywords(String seoKeywords) {
-        this.seoKeywords = seoKeywords;
+    public void setSeokeywords(String seokeywords) {
+        this.seokeywords = seokeywords;
     }
 
-    public String getSeoDescription() {
-        return seoDescription;
+    public String getSeodescription() {
+        return seodescription;
     }
 
-    public void setSeoDescription(String seoDescription) {
-        this.seoDescription = seoDescription;
+    public void setSeodescription(String seodescription) {
+        this.seodescription = seodescription;
     }
 
-    public String getTreePath() {
-        return treePath;
+    public String getTreepath() {
+        return treepath;
     }
 
-    public void setTreePath(String treePath) {
-        this.treePath = treePath;
+    public void setTreepath(String treepath) {
+        this.treepath = treepath;
     }
 
     public Integer getGrade() {
@@ -97,6 +104,7 @@ public class ProductCategory  extends  BaseEntity  {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="parent")
+    @JsonIgnore
     public ProductCategory getParent()
     {
         return this.parent;
@@ -109,6 +117,7 @@ public class ProductCategory  extends  BaseEntity  {
 
 
     @OneToMany(mappedBy="parent", fetch=FetchType.LAZY)
+    @JsonIgnore
     public Set<ProductCategory> getChildren()
     {
         return this.children;
@@ -118,6 +127,20 @@ public class ProductCategory  extends  BaseEntity  {
     {
         this.children = children;
     }
+
+
+    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
+    @JsonIgnore
+    public Set<Attribute> getAttribute()
+    {
+        return this.attribute;
+    }
+
+    public void setChildren(Set<Attribute> attribute)
+    {
+        this.children = children;
+    }
+
 
 
 
