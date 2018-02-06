@@ -3,7 +3,7 @@ package com.jftshop.service.impl;
 
 import com.jftshop.dao.ProductCategoryRepository;
 import com.jftshop.entity.ProductCategory;
-import com.jftshop.service.ProductCategoryService;
+import com.jftshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,32 +11,32 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-@Service("productCategoryService")
-public class ProductCategoryServiceImpl implements ProductCategoryService {
+@Service("productService")
+public class ProductServiceImpl implements ProductService {
 
 
     @Autowired
-    ProductCategoryRepository productCategoryRepository;
+    ProductCategoryRepository productRepository;
 
     @Transactional(readOnly=true)
-    public  List<Object[]> listAll(){
-        return  productCategoryRepository.listAll();
+    public  List<Object[]> listAllCategory(){
+        return  productRepository.listAllCategory();
     }
 
     @Transactional(readOnly=true)
-    public  ProductCategory getOne( String id ){
-        return  productCategoryRepository.getOne( id );
+    public  ProductCategory getProductCategory( String id ){
+        return  productRepository.getOne( id );
     }
 
     @Transactional
     public  ProductCategory save( ProductCategory productCategory ){
-        return  productCategoryRepository.save( productCategory );
+        return  productRepository.save( productCategory );
     }
 
 
     @Transactional(readOnly=true)
     public  List<ProductCategory> findTree(){
-        return  productCategoryRepository.findByParentIsNull();
+        return  productRepository.findByParentIsNull();
     }
 
 
