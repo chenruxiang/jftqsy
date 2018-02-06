@@ -3,7 +3,7 @@ package com.jftshop.controller.admin.product;
 
 import com.jftshop.bean.Message;
 import com.jftshop.entity.ProductCategory;
-import com.jftshop.service.ProductService;
+import com.jftshop.service.product.CategoryService;
 import com.jftshop.util.JFTStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class CategoryController {
     @ResponseBody
     public List<Object[]> listAll(ModelMap model)
     {
-        List<Object[]> list = this.productService.listAllCategory();
+        List<Object[]> list = this.productService.listAll();
         return list;
     }
 
@@ -51,7 +51,7 @@ public class CategoryController {
 
         if ( parentid!=null ){
 
-            ProductCategory parent = productService.getProductCategory( parentid );
+            ProductCategory parent = productService.getOne( parentid );
 
             productCategory.setParent( parent );
 
@@ -64,6 +64,6 @@ public class CategoryController {
     }
 
     @Autowired
-    ProductService productService;
+    CategoryService productService;
 
 }
