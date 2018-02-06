@@ -1,5 +1,5 @@
 import com.jftshop.dao.ProductCategoryRepository;
-import com.jftshop.service.ProductCategoryService;
+import com.jftshop.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class TestproductCategory {
     ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    ProductCategoryService productCategoryService;
+    ProductService productCategoryService;
 
 //    @Test
 //    @Transactional
@@ -67,7 +67,7 @@ public class TestproductCategory {
         System.out.println("---------------------->" + pc.getChildren().size() );
 */
 
-        List<Object[]> list = productCategoryRepository.listAll();
+        List<Object[]> list = productCategoryRepository.listAllCategory();
 
         System.out.println("---------------------->" + list.size() );
 

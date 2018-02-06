@@ -24,7 +24,13 @@ public class ProductCategory  extends  BaseEntity  {
     private Integer orders;
     private ProductCategory parent;
     private Set<ProductCategory> children = new HashSet();
+    //private Set<ParameterGroup> IIlIIllI = new HashSet();
     private Set<Attribute> attributes = new HashSet();
+
+    public ProductCategory(){
+        super();
+    }
+
 
     @Id
     public String getId() {
@@ -117,23 +123,23 @@ public class ProductCategory  extends  BaseEntity  {
         return this.children;
     }
 
-    public void setChildren(Set<ProductCategory> attribute)
+    public void setChildren(Set<ProductCategory> children)
     {
         this.children = children;
     }
 
 
-    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
-    @JsonIgnore
-    public Set<Attribute> getAttributes()
-    {
-        return this.attributes;
-    }
-
-    public void setAttributes(Set<Attribute> attributes)
-    {
-        this.attributes = attributes;
-    }
+//    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
+//    @JsonIgnore
+//    public Set<Attribute> getAttribute()
+//    {
+//        return this.attribute;
+//    }
+//
+//    public void setChildren(Set<Attribute> attribute)
+//    {
+//        this.children = children;
+//    }
 
 
 

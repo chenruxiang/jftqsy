@@ -1,9 +1,9 @@
-package com.jftshop.controller.admin;
+package com.jftshop.controller.admin.product;
 
 
 import com.jftshop.bean.Message;
 import com.jftshop.entity.ProductCategory;
-import com.jftshop.service.ProductCategoryService;
+import com.jftshop.service.ProductService;
 import com.jftshop.util.JFTStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +22,15 @@ import java.util.List;
 
 @Controller("productCategoryController")
 @RequestMapping({"/admin/product_category"})
-public class ProductCategoryController {
+public class CategoryController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductCategoryController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
 
     @GetMapping("/listall")
     @ResponseBody
     public List<Object[]> listAll(ModelMap model)
     {
-        List<Object[]> list = this.productCategoryService.listAll();
+        List<Object[]> list = this.productService.listAllCategory();
         return list;
     }
 
@@ -51,19 +51,19 @@ public class ProductCategoryController {
 
         if ( parentid!=null ){
 
-            ProductCategory parent = productCategoryService.getOne( parentid );
+            ProductCategory parent = productService.getProductCategory( parentid );
 
             productCategory.setParent( parent );
 
         }
 
-        productCategoryService.save( productCategory );
+        productService.save( productCategory );
 
-        return   Message.success("shop.SaveProductCategory.success", new Object[0]);
+        return Message.success("shop.SaveProductCategory.success", new Object[0]);
 
     }
 
     @Autowired
-    ProductCategoryService productCategoryService;
+    ProductService productService;
 
 }
