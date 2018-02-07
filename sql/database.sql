@@ -65,14 +65,18 @@ CREATE TABLE `attribute` (
  `name` varchar(255) NOT NULL,
  `propertyindex` int(11) DEFAULT NULL,
  `productcategory` varchar(255) NOT NULL,
- PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table attribute comment '属性';
 
 
 CREATE TABLE `attribute_option` (
- `attribute` varchar(255) NOT NULL,
- `options` varchar(255) DEFAULT NULL
+ `id` varchar(255)  NOT NULL,
+ `createdate` datetime NOT NULL default '0',
+ `modifydate` datetime DEFAULT NULL,
+ `attributeid` varchar(255) NOT NULL,
+ `options` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table attribute_option comment '属性集';
 

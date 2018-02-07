@@ -1,5 +1,5 @@
-import com.jftshop.dao.ProductCategoryRepository;
-import com.jftshop.service.ProductCategoryService;
+import com.jftshop.dao.product.CategoryRepository;
+import com.jftshop.service.product.CategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ public class TestproductCategory {
 
 
     @Autowired
-    ProductCategoryRepository productCategoryRepository;
+    CategoryRepository categoryRepository;
 
     @Autowired
-    ProductCategoryService productCategoryService;
+    CategoryService categoryService;
 
 //    @Test
 //    @Transactional
@@ -37,12 +37,12 @@ public class TestproductCategory {
 //
 //        pc2.setParent( pc );
 //
-//        productCategoryRepository.save( pc );
+//        categoryRepository.save( pc );
 //
-//        productCategoryRepository.save( pc2 );
+//        categoryRepository.save( pc2 );
 //
 //
-//        List<ProductCategory> list = productCategoryRepository.findByName( "女装" );
+//        List<ProductCategory> list = categoryRepository.findByName( "女装" );
 //
 //        System.out.println("---------------------->" + list.size() );
 //
@@ -54,7 +54,7 @@ public class TestproductCategory {
     public void  test2() throws Exception {
 
 /*
-        List<ProductCategory> list = productCategoryService.findTree();
+        List<ProductCategory> list = categoryService.findTree();
 
 
 
@@ -67,7 +67,7 @@ public class TestproductCategory {
         System.out.println("---------------------->" + pc.getChildren().size() );
 */
 
-        List<Object[]> list = productCategoryRepository.listAll();
+        List<Object[]> list = categoryRepository.listAll();
 
         System.out.println("---------------------->" + list.size() );
 

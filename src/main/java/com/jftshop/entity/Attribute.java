@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="attribute")
+
 public class Attribute extends  BaseEntity {
 
     private String id;

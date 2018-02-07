@@ -135,7 +135,7 @@
 </div>
 </body>
 </html>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     $(function(){
         var message = "${message}";
         var code = "${code}";
@@ -154,5 +154,5 @@
             }
         }
     });
-</script>
+</script>--%>
 
