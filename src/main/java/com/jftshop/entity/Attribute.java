@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-
+@Entity
+@Table(name = "attribute")
 public class Attribute extends  BaseEntity {
 
     private String id;
@@ -56,7 +57,7 @@ public class Attribute extends  BaseEntity {
         return this.productcategory;
     }
 
-    public void setProductCategory(ProductCategory productcategory)
+    public void setProductcategory(ProductCategory productcategory)
     {
         this.productcategory = productcategory;
     }

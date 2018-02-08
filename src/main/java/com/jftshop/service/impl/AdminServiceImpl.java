@@ -22,6 +22,8 @@ public class AdminServiceImpl implements AdminService {
         adminRepository.save(admin);
     }
 
+
+    //
     @Transactional(readOnly=true)
     public boolean usernameExists(String username)
     {
