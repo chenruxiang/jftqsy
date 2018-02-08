@@ -4,6 +4,8 @@ package com.jftshop.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "attribute")
@@ -14,6 +16,7 @@ public class Attribute extends  BaseEntity {
     private String name;
     private Integer propertyindex;
     private ProductCategory productcategory;
+    private Set<AttributeOption>  attributeoptions = new HashSet<AttributeOption>();
 
 
     @Id
@@ -49,7 +52,7 @@ public class Attribute extends  BaseEntity {
         this.propertyindex = propertyindex;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name="productcategory")
     @JsonIgnore
     public ProductCategory getProductcategory()
@@ -62,4 +65,14 @@ public class Attribute extends  BaseEntity {
         this.productcategory = productcategory;
     }
 
+
+    @OneToMany(mappedBy="attribute", fetch=FetchType.LAZY , cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<AttributeOption> getAttributeoptions() {
+        return attributeoptions;
+    }
+
+    public void setAttributeoptions(Set<AttributeOption> attributeoptions) {
+        this.attributeoptions = attributeoptions;
+    }
 }
