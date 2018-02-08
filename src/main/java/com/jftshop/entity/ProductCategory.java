@@ -128,20 +128,14 @@ public class ProductCategory  extends  BaseEntity  {
         this.children = children;
     }
 
+    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
+    @JsonIgnore
+    public Set<Attribute> getAttributes()
+    {
+        return this.attributes;
+    }
 
-//    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY)
-//    @JsonIgnore
-//    public Set<Attribute> getAttribute()
-//    {
-//        return this.attribute;
-//    }
-//
-//    public void setChildren(Set<Attribute> attribute)
-//    {
-//        this.children = children;
-//    }
-
-
-
-
+    public void setAttributes(Set<Attribute> attributes) {
+        this.attributes = attributes;
+    }
 }

@@ -1,5 +1,5 @@
 import com.jftshop.dao.AttributeRepository;
-import com.jftshop.dao.ProductCategoryRepository;
+//import com.jftshop.dao.ProductCategoryRepository;
 import com.jftshop.entity.Attribute;
 import com.jftshop.entity.AttributeOption;
 import com.jftshop.util.JFTStringUtils;
@@ -23,8 +23,6 @@ public class TestAttribute {
     @Autowired
     AttributeRepository attributeRepository;
 
-    @Autowired
-    ProductCategoryRepository productCategoryRepository;
 
     @Test
     @Transactional
@@ -41,7 +39,7 @@ public class TestAttribute {
         attributeOption1.setOptions("A1");
         //attributeOption1.setAttribute( attribute );
 
-        attribute.addAttributeOption( attributeOption1 );
+
 
 /*        AttributeOption attributeOption2 = new AttributeOption();
         attributeOption2.setId( JFTStringUtils.get32UUID() );
