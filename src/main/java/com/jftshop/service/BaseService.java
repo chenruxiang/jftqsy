@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ThinkPad on 2018/2/8.
@@ -22,5 +23,14 @@ public abstract  class BaseService<T, ID extends Serializable> {
     {
         return this.jpaRepository.getOne(id);
     }
+
+
+    @Transactional(readOnly=true)
+    List<T> findAll(){
+        return this.jpaRepository.findAll();
+    }
+
+
+
 
 }
