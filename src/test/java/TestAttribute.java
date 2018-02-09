@@ -1,17 +1,17 @@
 import com.jftshop.dao.product.AttributeRepository;
 import com.jftshop.dao.product.CategoryRepository;
 import com.jftshop.entity.Attribute;
+import com.jftshop.entity.AttributeOption;
+import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.product.AttributeService;
+import com.jftshop.util.JFTStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-
-import javax.transaction.Transactional;
-
-import static org.junit.Assert.*;
+import org.springframework.transaction.annotation.Transactional;
 
 //import com.jftshop.dao.ProductCategoryRepository;
 
@@ -34,7 +34,7 @@ public class TestAttribute {
     AttributeService attributeService;
 
 
-    @Test
+/*    @Test
     @Transactional
     public void  test2() throws Exception {
 
@@ -42,10 +42,9 @@ public class TestAttribute {
 
         assertNotNull(attribute);
 
-    }
+    }*/
 
 
-/*
     @Test
     @Transactional
     public void  test() throws Exception {
@@ -68,37 +67,6 @@ public class TestAttribute {
 
         attributeRepository.save( attribute );
 
-*//*        System.out.println("1------------------->"+ productCategory.getAttributes().size());
 
-        productCategory.getAttributes().add( attribute );
-
-        System.out.println("2------------------->"+ productCategory.getAttributes().size());*//*
-
-        //productCategory.getAttributes().add( attribute );
-        attribute.setProductcategory( productCategory );
-
-
-
-
-
-*//*        AttributeOption attributeOption2 = new AttributeOption();
-        attributeOption2.setId( JFTStringUtils.get32UUID() );
-        attributeOption2.setOptions("A2");
-        attributeOption2.setAttribute( attribute );
-
-        attribute.addAttributeOption( attributeOption1 );
-        attribute.addAttributeOption( attributeOption2 );*//*
-
-        //ProductCategory productCategory = productCategoryRepository.getOne( "70e695e64ae24e83811b6be595ea6fac" );
-
-        //productCategory.getAttributes().add( attribute );
-
-
-
-
-        //System.out.println("------------------->"+ productCategory.getName());
-
-
-
-    }*/
+    }
 }
