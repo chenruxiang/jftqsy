@@ -26,11 +26,9 @@ public abstract  class BaseService<T, ID extends Serializable> {
 
 
     @Transactional(readOnly=true)
-    List<T> findAll(){
+    public List<T> findAll(){
         return this.jpaRepository.findAll();
     }
-
-
 
 
 }
