@@ -30,7 +30,7 @@ public class CategoryController {
     @ResponseBody
     public List<Object[]> listAll(ModelMap model)
     {
-        List<Object[]> list = this.productService.listAll();
+        List<Object[]> list = this.categoryService.listAll();
         return list;
     }
 
@@ -51,19 +51,19 @@ public class CategoryController {
 
         if ( parentid!=null ){
 
-            ProductCategory parent = productService.getOne( parentid );
+            ProductCategory parent = categoryService.getOne( parentid );
 
             productCategory.setParent( parent );
 
         }
 
-        productService.save( productCategory );
+        categoryService.save( productCategory );
 
         return Message.success("shop.SaveProductCategory.success", new Object[0]);
 
     }
 
     @Autowired
-    CategoryService productService;
+    CategoryService categoryService;
 
 }

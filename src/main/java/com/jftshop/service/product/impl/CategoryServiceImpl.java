@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-@Service("productService")
+@Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
 
