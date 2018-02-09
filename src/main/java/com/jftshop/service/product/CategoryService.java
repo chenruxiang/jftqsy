@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CategoryService extends BaseService<ProductCategory, String> {
 
-    public abstract List<ProductCategory> findTree();
+    public  List<ProductCategory> findTree();
+
+    public List<Object[]> listAll();
 
 
 }
