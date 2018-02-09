@@ -263,7 +263,8 @@
         //菜单
         var menu = [
             {"name":"商品","url":"#","submenu":[{"name":"商品分类","url":"<%=path%>/admin/product/category/list.jsp"},
-                {"name":"商品参数","url":"<%=path%>/admin/product/attribute/list.jsp"}]},
+                {"name":"商品参数","url":"<%=path%>/admin/product/attribute/list.jsp"},
+                {"name":"品牌管理","url":"<%=path%>/admin/brand/listBrand"}]},
             {"name":"menu1","url":"#","submenu":[{"name":"menu1","url":"#"}]}
         ]
 
