@@ -9,7 +9,7 @@
 <body>
 
 <p><a href="javascript:void(0)" onclick="refresh()">刷新</a>
-<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增分类','<%=path%>/admin/product/parameter/add.jsp')">新增</a>
+<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增参数','<%=path%>/admin/product/parameter/add.jsp')">新增</a>
 
 
 

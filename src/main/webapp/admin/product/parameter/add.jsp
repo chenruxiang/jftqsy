@@ -7,17 +7,21 @@
 </head>
 <body>
 
-<form id="addform" action="<%=path%>/admin/product_category/save" method="post">
+<form id="addform" action="<%=path%>/admin/product_parameter/save" method="post">
 
     <span class="requiredField">*</span>名字
     <input type="text" id="name" name="name" required/>
     <br>
 
-    上级目录ID
-    <input type="text" id="parentid" name="parentid"/>
+    <span class="requiredField">*</span>绑定分类ID
+    <input type="text" id="categoryid" name="categoryid" required/>
     <br>
 
-    <input type="submit"  value="提交">
+    <span class="requiredField">*</span>参数内容
+    <input type="text" id="contents" name="contents" required/>
+    <br>
+
+    <input type="submit" value="提交">
 
 </form>
 
@@ -33,13 +37,20 @@
 
         var $addform = $("#addform");
         var $name = $("#name");
-        var $parentid = $("#parentid");
+        var $categoryid = $("#categoryid");
+        var $contents = $("#contents");
         var $submit = $(":submit");
 
 
         $addform.validate({
             rules: {
                 name: {
+                    required: true
+                },
+                categoryid: {
+                    required: true
+                },
+                contents: {
                     required: true
                 }
             },
@@ -55,7 +66,8 @@
                     type: "post",
                     data: {
                         name: $name.val(),
-                        parentid: $parentid.val()
+                        categoryid: $categoryid.val(),
+                        contents:$contents.val()
                     },
                     dataType: "json",
                     cache: false,
