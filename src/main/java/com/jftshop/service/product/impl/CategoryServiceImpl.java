@@ -27,8 +27,12 @@ public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory,String>
 
     @Transactional(readOnly=true)
     public  List<ProductCategory> findTree(){
-        this.save(new ProductCategory());
         return  categoryRepository.findByParentIsNull();
+    }
+
+    @Transactional(readOnly=true)
+    public  List<Object[]> listAll(){
+        return  categoryRepository.listAll();
     }
 
 }
