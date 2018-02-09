@@ -36,6 +36,8 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
         return jpaRepository.save(s);
     }
 
+
+
 }
 
 
