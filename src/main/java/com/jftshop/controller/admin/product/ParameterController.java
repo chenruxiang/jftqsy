@@ -25,10 +25,11 @@ public class ParameterController {
 
     @GetMapping("/listall")
     @ResponseBody
-    public List<Object[]> listAll(ModelMap model)
+    public List<ProductParameter> listAll()
     {
-     //   List<Object[]> list = this.parameterService.listAll();
-        return null;
+        List<ProductParameter> list = this.parameterService.findAll();
+        System.out.println("====================--------=================>" + list.get(0).getProductcategory().getId());
+        return list;
     }
 
     @PostMapping({"/save"})
@@ -47,7 +48,7 @@ public class ParameterController {
         productParameter.setContents(contents);
         ProductCategory productCategory = categoryService.getOne(categoryid);
         productParameter.setProductcategory(productCategory);
-        parameterService.save(productCategory);
+        parameterService.save(productParameter);
 
         return Message.success("shop.SaveProductCategory.success", new Object[0]);
 

@@ -20,9 +20,6 @@ public class ProductParameter extends BaseEntity {
     private String contents;
     private ProductCategory productcategory;
 
-    public ProductParameter(){
-        super();
-    }
 
     @Id
     public String getId() {
@@ -63,7 +60,7 @@ public class ProductParameter extends BaseEntity {
         this.orders = orders;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="productcategory")
     @JsonIgnore
     public ProductCategory getProductcategory()
