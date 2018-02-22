@@ -61,6 +61,10 @@ public class TestAttribute {
         AttributeOption attributeOption1 = new AttributeOption();
         attributeOption1.setId( JFTStringUtils.get32UUID() );
         attributeOption1.setOptions("A1");
+
+        //!!!!
+        attributeOption1.setAttribute( attribute );
+
         attribute.getAttributeoptions().add( attributeOption1 );
 
         attribute.setProductcategory( productCategory );
