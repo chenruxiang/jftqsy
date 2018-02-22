@@ -56,7 +56,6 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table product_category comment '目录';
 
-
 CREATE TABLE `attribute` (
  `id` varchar(255)  NOT NULL,
  `createdate` datetime NOT NULL default '0',
@@ -64,10 +63,12 @@ CREATE TABLE `attribute` (
  `orders` int(11) DEFAULT NULL,
  `name` varchar(255) NOT NULL,
  `propertyindex` int(11) DEFAULT NULL,
- `productcategory` varchar(255) NOT NULL,
+ `productcategory` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table attribute comment '属性';
+
+
 
 
 CREATE TABLE `attribute_option` (
