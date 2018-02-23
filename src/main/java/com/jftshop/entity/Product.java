@@ -1,10 +1,12 @@
 package com.jftshop.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ThinkPad on 2018/2/22.
@@ -74,6 +76,9 @@ public class Product extends  BaseEntity {
     private String brand;
     private String goods;
     private String productcategory;
+
+    private List<ProductImage> productimages = new ArrayList();
+    private List<ProductParameter> productparameters = new ArrayList();
 
     @Id
     public String getId() {
@@ -555,4 +560,26 @@ public class Product extends  BaseEntity {
     public void setProductcategory(String productcategory) {
         this.productcategory = productcategory;
     }
+
+
+    @OneToMany(mappedBy = "product",fetch=FetchType.LAZY , cascade = CascadeType.ALL)
+    @JsonIgnore
+    public List<ProductImage> getProductimages() {
+        return productimages;
+    }
+
+    public void setProductimages(List<ProductImage> productimages) {
+        this.productimages = productimages;
+    }
+
+    @OneToMany(mappedBy = "product",fetch=FetchType.LAZY , cascade = CascadeType.ALL)
+    @JsonIgnore
+    public List<ProductParameter> getProductparameters() {
+        return productparameters;
+    }
+
+    public void setProductparameters(List<ProductParameter> productparameters) {
+        this.productparameters = productparameters;
+    }
+
 }

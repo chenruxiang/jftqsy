@@ -67,6 +67,7 @@ public class Attribute extends  BaseEntity {
 
 
     @OneToMany(mappedBy="attribute", fetch=FetchType.LAZY , cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<AttributeOption> getAttributeoptions() {
         return attributeoptions;
     }

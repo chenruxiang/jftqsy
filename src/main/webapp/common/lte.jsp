@@ -70,7 +70,10 @@
 <script src="<%=path%>/common/js/jquery-ui.min.js"></script>
 <script src="<%=path%>/common/js/jquery.form.js"></script>
 
-<script type="text/javascript" src="<%=path%>/common/jedate/jedate.js"></script>
+<script src="<%=path%>/common/jedate/jedate.js"></script>
+
+<!-- 在线编辑器 -->
+<script src="<%=path%>/common/js/editor/kindeditor.js"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>

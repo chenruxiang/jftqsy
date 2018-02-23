@@ -198,18 +198,32 @@ CREATE TABLE `product` (
 alter table product comment '产品';
 
 
-CREATE TABLE `xx_product_product_image` (
-  `product` bigint(20) NOT NULL,
+CREATE TABLE `product_product_image` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
   `large` varchar(255) DEFAULT NULL,
   `medium` varchar(255) DEFAULT NULL,
   `orders` int(11) DEFAULT NULL,
   `source` varchar(255) DEFAULT NULL,
   `thumbnail` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  KEY `FK66470ABC79F8D99A` (`product`),
-  CONSTRAINT `FK66470ABC79F8D99A` FOREIGN KEY (`product`) REFERENCES `xx_product` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-alter table product comment '产品TUO';
+alter table product_product_image comment '产品图片';
+
+
+CREATE TABLE `product_parameter_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
+  `parametervalue` varchar(255) DEFAULT NULL,
+  `parametervaluekey` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_parameter_value comment '产品参数';
 
 
 
