@@ -7,19 +7,24 @@
 </head>
 <body>
 
-<form id="addform" action="<%=path%>/admin/product_parameter/save" method="post">
+<form id="addform" action="<%=path%>/admin/product/parameter/save" method="post">
+
+    <span class="requiredField">*</span>绑定分类ID
+    <input type="text" id="productcategoryid" name="productcategoryid" required/>
+    <br>
 
     <span class="requiredField">*</span>名字
     <input type="text" id="name" name="name" required/>
     <br>
 
-    <span class="requiredField">*</span>绑定分类ID
-    <input type="text" id="categoryid" name="categoryid" required/>
-    <br>
+    <a href="javascript:void(0)" onclick="addPar()">增加参数</a><br><br>
+    名称：<br>
 
-    <span class="requiredField">*</span>参数内容
-    <input type="text" id="contents" name="contents" required/>
-    <br>
+    <input type="text" name="parameters[0].name">
+
+    <div id ="pc">
+
+    </div>
 
     <input type="submit" value="提交">
 
@@ -32,13 +37,11 @@
 
 <script type="text/javascript">
 
-
-    $().ready(function() {
+   /* $().ready(function() {
 
         var $addform = $("#addform");
         var $name = $("#name");
         var $categoryid = $("#categoryid");
-        var $contents = $("#contents");
         var $submit = $(":submit");
 
 
@@ -48,9 +51,6 @@
                     required: true
                 },
                 categoryid: {
-                    required: true
-                },
-                contents: {
                     required: true
                 }
             },
@@ -66,8 +66,7 @@
                     type: "post",
                     data: {
                         name: $name.val(),
-                        categoryid: $categoryid.val(),
-                        contents:$contents.val()
+                        categoryid: $categoryid.val()
                     },
                     dataType: "json",
                     cache: false,
@@ -88,6 +87,11 @@
                 $submit.prop("disabled", false);
             }
         }
-
     });
+ */
+    var num = 0;
+    function addPar() {
+        num = num + 1;
+        $("#pc").append( '<input type="text" name="parameters['+num+'].name">'+"<br>")
+    }
 </script>

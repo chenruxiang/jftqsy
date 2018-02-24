@@ -1,9 +1,9 @@
 package com.jftshop.controller.admin.product;
 
 
-import com.jftshop.bean.Message;
+import com.jftshop.entity.ParameterGroup;
 import com.jftshop.entity.ProductCategory;
-import com.jftshop.entity.ProductParameter;
+import com.jftshop.entity.Parameter;
 import com.jftshop.service.product.CategoryService;
 import com.jftshop.service.product.ParameterService;
 import com.jftshop.util.JFTStringUtils;
@@ -11,47 +11,46 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-@Controller("productParameterController")
-@RequestMapping({"/admin/product_parameter"})
+@Controller("parameterController")
+@RequestMapping({"/admin/product/parameter"})
 public class ParameterController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ParameterController.class);
 
     @GetMapping("/listall")
-    @ResponseBody
-    public List<ProductParameter> listAll()
-    {
-        List<ProductParameter> list = this.parameterService.findAll();
-        System.out.println("====================--------=================>" + list.get(0).getProductcategory().getId());
-        return list;
+    public String listAll(Model model) {
+        List<ParameterGroup> list = this.parameterService.findAll();
+        model.addAttribute("parlist",list);
+        return "admin/product/parameter/list";
     }
 
     @PostMapping({"/save"})
-    @ResponseBody
-    public Message submit(@RequestAttribute Map<String, String> pmap) {
+    public String submit(ParameterGroup parameterGroup, String productcategoryid) {
 
-        String name = pmap.get("name");
-        String categoryid = pmap.get("categoryid");
-        String contents = pmap.get("contents");
-        if ( JFTStringUtils.isBlank(name) || JFTStringUtils.isBlank(categoryid) || JFTStringUtils.isBlank(contents) )
-            return Message.error("shop.common.invalid", new Object[0]);
+        ProductCategory productCategory = this.categoryService.getOne(productcategoryid);
+        List<Parameter> parameters = parameterGroup.getParameters();
+        Iterator<Parameter> iterator = parameters.iterator();
+        while (iterator.hasNext()){
+            Parameter parameter = iterator.next();
+            if (parameter == null || JFTStringUtils.isBlank(parameter.getName())){
+                iterator.remove();
+            }else {
+                parameter.setId(JFTStringUtils.get32UUID());
+                parameter.setParametergroup(parameterGroup);
+            }
+        }
 
-        ProductParameter productParameter = new ProductParameter();
-        productParameter.setId(JFTStringUtils.get32UUID());
-        productParameter.setName(name);
-        productParameter.setContents(contents);
-        ProductCategory productCategory = categoryService.getOne(categoryid);
-        productParameter.setProductcategory(productCategory);
-        parameterService.save(productParameter);
+        parameterGroup.setId(JFTStringUtils.get32UUID());
+        parameterGroup.setProductcategory(productCategory);
+        parameterService.save(parameterGroup);
 
-        return Message.success("shop.SaveProductCategory.success", new Object[0]);
-
+        return "admin/product/parameter/add";
     }
 
     @Autowired

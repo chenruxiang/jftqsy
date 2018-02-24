@@ -1,10 +1,10 @@
 package com.jftshop.service.product;
 
 
-import com.jftshop.entity.ProductCategory;
-import com.jftshop.entity.ProductParameter;
+import com.jftshop.entity.Parameter;
+import com.jftshop.entity.ParameterGroup;
 import com.jftshop.service.BaseService;
 
-public interface ParameterService extends BaseService<ProductParameter, String> {
+public interface ParameterService extends BaseService<ParameterGroup, String> {
 
 }

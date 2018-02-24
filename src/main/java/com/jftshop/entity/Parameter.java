@@ -10,15 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="product_parameter")
-public class ProductParameter extends BaseEntity {
+@Table(name="parameter")
+public class Parameter extends BaseEntity {
 
 
     private String id;
     private String name;
     private Integer orders;
-    private String contents;
-    private ProductCategory productcategory;
+    private ParameterGroup parametergroup;
 
 
     @Id
@@ -41,17 +40,6 @@ public class ProductParameter extends BaseEntity {
         this.name = name;
     }
 
-    @NotEmpty
-    @Length(max=300)
-    @Column(nullable=false)
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
     public Integer getOrders() {
         return orders;
     }
@@ -61,16 +49,16 @@ public class ProductParameter extends BaseEntity {
     }
 
     @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="productcategory")
+    @JoinColumn(name="parametergroup")
     @JsonIgnore
-    public ProductCategory getProductcategory()
+    public ParameterGroup getParametergroup()
     {
-        return this.productcategory;
+        return parametergroup;
     }
 
-    public void setProductcategory(ProductCategory productcategory)
+    public void setParametergroup(ParameterGroup parametergroup)
     {
-        this.productcategory = productcategory;
+        this.parametergroup = parametergroup;
     }
 
 

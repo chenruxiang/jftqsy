@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page import="com.jftshop.entity.ParameterGroup" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.jftshop.entity.Parameter" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/lte.jsp"%>
 
 <html>
@@ -8,57 +11,26 @@
 </head>
 <body>
 
-<p><a href="javascript:void(0)" onclick="refresh()">刷新</a>
-<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增参数','<%=path%>/admin/product/parameter/add.jsp')">新增</a>
+<p><a href="<%=path%>/admin/product/parameter/listall">刷新</a>
+<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增参数','<%=path%>/admin/product/parameter/add.jsp')">新增参数</a>
 
+<%
+  Iterator<ParameterGroup> iterator = ((List)request.getAttribute("parlist")).iterator();
+  out.write("<br>");
+  out.write("<br>");
 
-
-<div id ="draw"></div>
-
-
+  while (iterator.hasNext()){
+      ParameterGroup parameterGroup = iterator.next();
+      out.write(parameterGroup.getName()+"<br>");
+   //   out.write("<br>");
+      Iterator<Parameter> iterator2 = parameterGroup.getParameters().iterator();
+      while (iterator2.hasNext()){
+          out.write("&nbsp;&nbsp;&nbsp;");
+          out.write(iterator2.next().getName() +"<br>");
+      }
+      out.write("<br>");
+  }
+%>
 
 </body>
 </html>
-
-<script type="text/javascript">
-
-$(function(){
-
-
-});
-
-
-function refresh(){
-
-    $.get("<%=path%>/admin/product_parameter/listall",function(data,status){
-
-        //alert(JSON.stringify(data));
-        $("#draw").html("<br>");
-        jQuery.each( data, function(index) {
-            var id = data[index][0];
-            var name = data[index][5];
-            var parent = data[index][10];
-            if ( parent == null  || parent == '') {
-                $("#draw").append( "<br>" + name +"&nbsp;&nbsp;&nbsp;id:" +  id);
-                iterator( data   , id );
-            }
-        });
-
-    });
-
-}
-
-
-function iterator( data , parentid ) {
-    jQuery.each( data, function(index) {
-        var id = data[index][0];
-       var parent = data[index][10];
-        var name = data[index][5];
-        if ( parent == parentid ){
-            $("#draw").append( "<br>&nbsp&nbsp&nbsp"+ name +"&nbsp;&nbsp;&nbsp;id:" +  id);
-        }
-    });
-}
-
-
-</script>

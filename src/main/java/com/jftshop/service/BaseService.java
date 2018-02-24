@@ -10,6 +10,8 @@ public  interface BaseService<T, ID extends Serializable> {
 
     public  T getOne(ID id);
 
+    public  T findOne(ID id);
+
     public  List<T> findAll();
 
     public <S extends T> S save(S s);

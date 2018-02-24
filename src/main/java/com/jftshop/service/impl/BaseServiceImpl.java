@@ -25,6 +25,11 @@ public class BaseServiceImpl<T, ID extends Serializable> implements BaseService<
         return this.jpaRepository.getOne(id);
     }
 
+    @Transactional(readOnly=true)
+    public T findOne(ID id)
+    {
+        return this.jpaRepository.findOne(id);
+    }
 
     @Transactional(readOnly=true)
     public List<T> findAll(){
