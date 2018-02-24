@@ -69,8 +69,6 @@ CREATE TABLE `attribute` (
 alter table attribute comment '属性';
 
 
-
-
 CREATE TABLE `attribute_option` (
  `id` varchar(255)  NOT NULL,
  `createdate` datetime NOT NULL default '0',
@@ -104,5 +102,30 @@ CREATE TABLE `parameter_group` (
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table parameter_group comment '参数组';
+
+
+CREATE TABLE `specification` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table specification comment '规格';
+
+CREATE TABLE `specification_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `specification` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table specification_value comment '规格值';
 
 

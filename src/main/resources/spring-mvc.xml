@@ -46,11 +46,19 @@
 
 
 	<mvc:interceptors>
-		<!-- 多个拦截器，顺序执行 -->
+	<!-- 多个拦截器，顺序执行 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="com.jftshop.interceptor.RequestInterceptor"></bean>
+			 <bean class="com.jftshop.interceptor.RequestInterceptor"></bean>
+			</mvc:interceptor>
+		<mvc:interceptor>
+
+		<mvc:mapping path="/**" />
+			<bean id="openSessionInViewInterceptor" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+			</bean>
 		</mvc:interceptor>
+
 	</mvc:interceptors>
 
 	<!-- 静态资源问题，不需要进行拦截过滤，主要是针对css，js，image等资源 -->
