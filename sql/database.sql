@@ -129,3 +129,101 @@ CREATE TABLE `specification_value` (
 alter table specification_value comment '规格值';
 
 
+
+CREATE TABLE `product` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `allocatedstock` int(11) NOT NULL,
+  `attributevalue0` varchar(255) DEFAULT NULL,
+  `attributevalue1` varchar(255) DEFAULT NULL,
+  `attributevalue10` varchar(255) DEFAULT NULL,
+  `attributevalue11` varchar(255) DEFAULT NULL,
+  `attributevalue12` varchar(255) DEFAULT NULL,
+  `attributevalue13` varchar(255) DEFAULT NULL,
+  `attributevalue14` varchar(255) DEFAULT NULL,
+  `attributevalue15` varchar(255) DEFAULT NULL,
+  `attributevalue16` varchar(255) DEFAULT NULL,
+  `attributevalue17` varchar(255) DEFAULT NULL,
+  `attributevalue18` varchar(255) DEFAULT NULL,
+  `attributevalue19` varchar(255) DEFAULT NULL,
+  `attributevalue2` varchar(255) DEFAULT NULL,
+  `attributevalue3` varchar(255) DEFAULT NULL,
+  `attributevalue4` varchar(255) DEFAULT NULL,
+  `attributevalue5` varchar(255) DEFAULT NULL,
+  `attributevalue6` varchar(255) DEFAULT NULL,
+  `attributevalue7` varchar(255) DEFAULT NULL,
+  `attributevalue8` varchar(255) DEFAULT NULL,
+  `attributevalue9` varchar(255) DEFAULT NULL,
+  `cost` decimal(21,6) DEFAULT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `hits` bigint(20) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `introduction` longtext,
+  `isgift` bit(1) NOT NULL,
+  `islist` bit(1) NOT NULL,
+  `ismarketable` bit(1) NOT NULL,
+  `istop` bit(1) NOT NULL,
+  `keyword` varchar(255) DEFAULT NULL,
+  `marketprice` decimal(21,6) NOT NULL,
+  `memo` varchar(255) DEFAULT NULL,
+  `monthhits` bigint(20) NOT NULL,
+  `monthhitsdate` datetime NOT NULL,
+  `monthsales` bigint(20) NOT NULL,
+  `monthsalesdate` datetime NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `point` bigint(20) NOT NULL,
+  `price` decimal(21,6) NOT NULL,
+  `sales` bigint(20) NOT NULL,
+  `score` float NOT NULL,
+  `scorecount` bigint(20) NOT NULL,
+  `seodescription` varchar(255) DEFAULT NULL,
+  `seokeywords` varchar(255) DEFAULT NULL,
+  `seotitle` varchar(255) DEFAULT NULL,
+  `sn` varchar(255) NOT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `stockmemo` varchar(255) DEFAULT NULL,
+  `totalscore` bigint(20) NOT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `weekhits` bigint(20) NOT NULL,
+  `weekhitsdate` datetime NOT NULL,
+  `weeksales` bigint(20) NOT NULL,
+  `weeksalesdate` datetime NOT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `brand` varchar(255) DEFAULT NULL,
+  `goods` varchar(255) NOT NULL,
+  `productcategory` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product comment '产品';
+
+
+CREATE TABLE `product_product_image` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
+  `large` varchar(255) DEFAULT NULL,
+  `medium` varchar(255) DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `source` varchar(255) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_product_image comment '产品图片';
+
+
+CREATE TABLE `product_parameter_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
+  `parametervalue` varchar(255) DEFAULT NULL,
+  `parametervaluekey` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_parameter_value comment '产品参数';
+
+
+

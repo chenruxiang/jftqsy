@@ -34,6 +34,8 @@ function refresh(){
 
         //alert(JSON.stringify(data));
         $("#draw").html("<br>");
+
+
         jQuery.each( data, function(index) {
             var id = data[index][0];
             var name = data[index][5];

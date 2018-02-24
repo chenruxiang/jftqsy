@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name="specification")
 public class Specification extends BaseEntity {
 
-    protected String id;
+    private String id;
     private Integer orders;
     private String memo;
     private String name;

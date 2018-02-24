@@ -12,26 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-@Service("productService")
-public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory, String> implements CategoryService {
-
+@Service("categoryService")
+public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory,String> implements CategoryService {
 
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Transactional(readOnly=true)
-    public  List<Object[]> listAll(){
-        return  categoryRepository.listAll();
-    }
-
-    @Transactional(readOnly=true)
-    public  ProductCategory getOne( String id ){
-        return  categoryRepository.getOne( id );
-    }
-
-    @Transactional
-    public  ProductCategory save( ProductCategory productCategory ){
-        return  categoryRepository.save( productCategory );
+    @Autowired
+    public void setBaseDao(CategoryRepository categoryRepository)
+    {
+        super.setBaseDao(categoryRepository);
     }
 
 
@@ -40,5 +30,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory, String
         return  categoryRepository.findByParentIsNull();
     }
 
+    @Transactional(readOnly=true)
+    public  List<Object[]> listAll(){
+        return  categoryRepository.listAll();
+    }
 
 }
