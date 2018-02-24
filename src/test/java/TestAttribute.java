@@ -1,10 +1,9 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jftshop.dao.product.AttributeRepository;
 import com.jftshop.dao.product.CategoryRepository;
 import com.jftshop.entity.Attribute;
-import com.jftshop.entity.AttributeOption;
-import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.product.AttributeService;
-import com.jftshop.util.JFTStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,33 +43,41 @@ public class TestAttribute {
 
     }*/
 
-
-    @Test
+/*    @Test
     @Transactional
     public void  test() throws Exception {
-
         ProductCategory productCategory = categoryrepository.getOne( "70e695e64ae24e83811b6be595ea6fac" );
-
-
         Attribute attribute = new Attribute();
         attribute.setId( JFTStringUtils.get32UUID() );
         attribute.setName("ABC");
         attribute.setOrders(11);
         attribute.setPropertyindex(11);
-
         AttributeOption attributeOption1 = new AttributeOption();
         attributeOption1.setId( JFTStringUtils.get32UUID() );
         attributeOption1.setOptions("A1");
-
         //!!!!
         attributeOption1.setAttribute( attribute );
-
         attribute.getAttributeoptions().add( attributeOption1 );
-
         attribute.setProductcategory( productCategory );
-
         attributeRepository.save( attribute );
+    }*/
 
+
+    @Test
+    @Transactional
+    public void  test() throws Exception {
+
+        Attribute attribute = attributeRepository.getById( "462b345a9dbe4517a52fe68f9b0792a8");
+
+        System.out.println( "------------------>" + attribute.getId());
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().enableComplexMapKeySerialization().create();
+        Gson gson2 = new GsonBuilder().create();
+
+
+        Attribute attribute2 = new Attribute();attribute2.setId("123");
+        System.out.println( "------------------>" + gson.toJson( attribute  ));
+        System.out.println( "------------------>" + gson.toJson( attribute2  ));
 
     }
 }

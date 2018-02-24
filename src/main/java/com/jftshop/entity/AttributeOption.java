@@ -1,6 +1,7 @@
 package com.jftshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 
@@ -12,8 +13,8 @@ import javax.persistence.*;
 @Table(name = "attribute_option")
 public class AttributeOption extends  BaseEntity {
 
-    private String id;
-    private String options;
+    @Expose private String id;
+    @Expose private String options;
     private Attribute attribute;
 
     @Id

@@ -1,4 +1,7 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jftshop.dao.product.CategoryRepository;
+import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.product.CategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -53,23 +54,11 @@ public class TestproductCategory {
     @Transactional
     public void  test2() throws Exception {
 
-/*
-        List<ProductCategory> list = categoryService.findTree();
+        ProductCategory pc = categoryRepository.getById("70e695e64ae24e83811b6be595ea6fac");
 
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().enableComplexMapKeySerialization().create();
 
-
-        System.out.println("---------------------->" + list.size() );
-
-
-        ProductCategory pc =  list.get(0);
-
-
-        System.out.println("---------------------->" + pc.getChildren().size() );
-*/
-
-        List<Object[]> list = categoryRepository.listAll();
-
-        System.out.println("---------------------->" + list.size() );
+        System.out.println( "------------------>" + gson.toJson( pc  ) );
 
     }
 
