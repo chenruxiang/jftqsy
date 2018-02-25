@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
-public class TestproductCategory {
+public class TestProductCategory {
 
 
     @Autowired
@@ -54,7 +54,7 @@ public class TestproductCategory {
     @Transactional
     public void  test2() throws Exception {
 
-        ProductCategory pc = categoryRepository.getById("70e695e64ae24e83811b6be595ea6fac");
+        ProductCategory pc = categoryRepository.getAttibuteByCategoryId("70e695e64ae24e83811b6be595ea6fac");
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().enableComplexMapKeySerialization().create();
 

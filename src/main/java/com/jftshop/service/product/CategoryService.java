@@ -11,5 +11,7 @@ public interface CategoryService extends BaseService<ProductCategory, String> {
 
     public List<Object[]> listAll();
 
+    public ProductCategory getAttibuteByCategoryId(String id);
+
 
 }

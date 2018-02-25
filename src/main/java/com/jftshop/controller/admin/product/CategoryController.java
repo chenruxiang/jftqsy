@@ -1,6 +1,8 @@
 package com.jftshop.controller.admin.product;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jftshop.bean.Message;
 import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.product.CategoryService;
@@ -33,6 +35,25 @@ public class CategoryController {
         List<Object[]> list = this.categoryService.listAll();
         return list;
     }
+
+
+    @RequestMapping(value = "/getatts",produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String  getAttibuteByCategoryId(String id)
+    {
+        LOG.debug("id={}",id);
+
+        ProductCategory productcategory  = this.categoryService.getAttibuteByCategoryId(id);
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().enableComplexMapKeySerialization().create();
+
+        String rstr =  gson.toJson( productcategory );
+
+        System.out.println("d----------");
+
+        return rstr;
+    }
+
 
     @PostMapping({"/save"})
     @ResponseBody

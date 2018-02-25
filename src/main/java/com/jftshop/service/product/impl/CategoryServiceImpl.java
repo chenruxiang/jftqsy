@@ -35,4 +35,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory,String>
         return  categoryRepository.listAll();
     }
 
+
+    @Transactional(readOnly=true)
+    public ProductCategory getAttibuteByCategoryId(String id){
+        return categoryRepository.getAttibuteByCategoryId(id);
+    }
+
 }
