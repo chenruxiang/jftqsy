@@ -7,8 +7,7 @@
 </head>
 <body>
 
-<form id="addform" action="<%=path%>/admin/product/attribute/save" method="post" enctype="multipart/form-data">
-
+<form id="addform" action="<%=path%>/admin/product/save" method="post" enctype="multipart/form-data">
 
 <div class="container">
 
@@ -113,8 +112,8 @@
 
     function addpic() {
 
-        var trHtml = '<tr><td><input type="file" name="productImages[' + productImageIndex + '].file" class="productImageFile" \/><\/td><td>' +
-                '<input type="text" name="productImages[' + productImageIndex + '].title" class="text" maxlength="200" \/><\/td><td>' +
+        var trHtml = '<tr><td><input type="file" name="productimages[' + productImageIndex + '].file" class="productImageFile" \/><\/td><td>' +
+                '<input type="text" name="productimages[' + productImageIndex + '].title" class="text" maxlength="200" \/><\/td><td>' +
                 '<a href="javascript:;" class="deleteProductImage">删除<\/a><\/td><\/tr>';
 
         $("#pic").append(trHtml);

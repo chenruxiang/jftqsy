@@ -75,7 +75,7 @@ public class Product extends  BaseEntity {
     private Integer weight;
     private String brand;
     private String goods;
-    private String productcategory;
+    private ProductCategory productcategory;
 
     private List<ProductImage> productimages = new ArrayList();
     private List<ProductParameter> productparameters = new ArrayList();
@@ -553,14 +553,16 @@ public class Product extends  BaseEntity {
         this.goods = goods;
     }
 
-    public String getProductcategory() {
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="productcategoryid")
+    @JsonIgnore
+    public ProductCategory getProductcategory() {
         return productcategory;
     }
 
-    public void setProductcategory(String productcategory) {
+    public void setProductcategory(ProductCategory productcategory) {
         this.productcategory = productcategory;
     }
-
 
     @OneToMany(mappedBy = "product",fetch=FetchType.LAZY , cascade = CascadeType.ALL)
     @JsonIgnore

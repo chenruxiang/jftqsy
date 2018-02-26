@@ -27,6 +27,7 @@ public class ProductCategory  extends  BaseEntity  {
     //private Set<ParameterGroup> IIlIIllI = new HashSet();
     private Set<Attribute> attributes = new HashSet();
     private Set<ParameterGroup> parametergroups = new HashSet();
+    private Product product;
 
     public ProductCategory(){
         super();
@@ -150,5 +151,16 @@ public class ProductCategory  extends  BaseEntity  {
 
     public void setAttributes(Set<Attribute> attributes) {
         this.attributes = attributes;
+    }
+
+
+    @OneToMany(mappedBy="productcategory", fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

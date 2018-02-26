@@ -192,7 +192,7 @@ CREATE TABLE `product` (
   `weight` int(11) DEFAULT NULL,
   `brand` varchar(255) DEFAULT NULL,
   `goods` varchar(255) NOT NULL,
-  `productcategory` varchar(255) NOT NULL,
+  `productcategoryid` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table product comment '产品';
@@ -224,6 +224,17 @@ CREATE TABLE `product_parameter_value` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table product_parameter_value comment '产品参数';
+
+
+CREATE TABLE `goods` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_parameter_value comment '货物';
+
+
 
 
 

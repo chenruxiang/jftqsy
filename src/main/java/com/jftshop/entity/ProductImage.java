@@ -1,6 +1,7 @@
 package com.jftshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class ProductImage extends  BaseEntity {
     private String thumbnail;
     private String title;
     private Product product;
+    private MultipartFile file;
 
     @Id
     public String getId() {
@@ -29,8 +31,6 @@ public class ProductImage extends  BaseEntity {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     public String getLarge() {
         return large;
@@ -90,5 +90,17 @@ public class ProductImage extends  BaseEntity {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Transient
+    public MultipartFile getFile()
+    {
+        return this.file;
+    }
+
+    public void setFile(MultipartFile file)
+    {
+        this.file = file;
+    }
+
 
 }
