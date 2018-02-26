@@ -1,18 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ThinkPad
-  Date: 2018/2/22
-  Time: 17:29
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file="/common/lte.jsp"%>
+
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 
+<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增商品','<%=path%>/admin/product/product/add.jsp')">新增商品</a>
+
 
 
 </body>
 </html>
+
+<script type="text/javascript">
+
+
+</script>

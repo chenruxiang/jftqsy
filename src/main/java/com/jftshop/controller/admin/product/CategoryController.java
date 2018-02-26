@@ -1,9 +1,9 @@
 package com.jftshop.controller.admin.product;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jftshop.bean.Message;
+import com.jftshop.entity.Attribute;
+import com.jftshop.entity.ParameterGroup;
 import com.jftshop.entity.ProductCategory;
 import com.jftshop.service.product.CategoryService;
 import com.jftshop.util.JFTStringUtils;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 @Controller("productCategoryController")
 @RequestMapping({"/admin/product_category"})
@@ -37,21 +38,22 @@ public class CategoryController {
     }
 
 
-    @RequestMapping(value = "/getatts",produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/getattibutebycategoryid")
     @ResponseBody
-    public String  getAttibuteByCategoryId(String id)
+    public Set<Attribute> getAttibuteByCategoryId(String id)
     {
         LOG.debug("id={}",id);
-
         ProductCategory productcategory  = this.categoryService.getAttibuteByCategoryId(id);
+        return  productcategory.getAttributes();
+    }
 
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().enableComplexMapKeySerialization().create();
-
-        String rstr =  gson.toJson( productcategory );
-
-        System.out.println("d----------");
-
-        return rstr;
+    @RequestMapping(value = "/getparametersbycategoryid")
+    @ResponseBody
+    public Set<ParameterGroup> getParametersByCategoryId(String id)
+    {
+        LOG.debug("id={}",id);
+        ProductCategory productcategory  = this.categoryService.getParametersByCategoryId(id);
+        return  productcategory.getParametergroups();
     }
 
 

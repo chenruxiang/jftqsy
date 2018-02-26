@@ -1,7 +1,6 @@
 package com.jftshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 
@@ -13,8 +12,8 @@ import javax.persistence.*;
 @Table(name = "attribute_option")
 public class AttributeOption extends  BaseEntity {
 
-    @Expose private String id;
-    @Expose private String options;
+    private String id;
+    private String options;
     private Attribute attribute;
 
     @Id
@@ -33,7 +32,6 @@ public class AttributeOption extends  BaseEntity {
     public void setOptions(String options) {
         this.options = options;
     }
-
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="attributeid")

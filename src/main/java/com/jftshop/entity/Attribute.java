@@ -1,7 +1,7 @@
 package com.jftshop.entity;
 
 
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.List;
 @Table(name = "attribute")
 public class Attribute extends  BaseEntity {
 
-    @Expose private String id;
-    @Expose private Integer orders;
-    @Expose private String name;
+    private String id;
+    private Integer orders;
+    private String name;
     private Integer propertyindex;
     private ProductCategory productcategory;
-    @Expose private List<AttributeOption> attributeoptions = new ArrayList();
+    private List<AttributeOption> attributeoptions = new ArrayList();
 
 
     @Id
@@ -52,6 +52,7 @@ public class Attribute extends  BaseEntity {
         this.propertyindex = propertyindex;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name="productcategory")
     public ProductCategory getProductcategory()

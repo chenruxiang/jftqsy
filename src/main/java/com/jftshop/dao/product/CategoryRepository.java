@@ -21,4 +21,7 @@ public interface CategoryRepository extends JpaRepository<ProductCategory, Strin
     @Query("select a from ProductCategory a inner join FETCH  a.attributes b inner join FETCH  b.attributeoptions c where a.id = ?1 ")
     ProductCategory getAttibuteByCategoryId(String id);
 
+    @Query("select a from ProductCategory a inner join FETCH  a.parametergroups b inner join FETCH  b.parameters c where a.id = ?1 ")
+    ProductCategory getParametersByCategoryId(String id);
+
 }

@@ -6,8 +6,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name="parameter")
@@ -18,7 +16,6 @@ public class Parameter extends BaseEntity {
     private String name;
     private Integer orders;
     private ParameterGroup parametergroup;
-
 
     @Id
     public String getId() {

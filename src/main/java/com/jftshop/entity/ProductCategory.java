@@ -2,7 +2,6 @@ package com.jftshop.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.annotations.Expose;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -15,8 +14,8 @@ import java.util.Set;
 public class ProductCategory  extends  BaseEntity  {
 
 
-    @Expose private String id;
-    @Expose private String name;
+    private String id;
+    private String name;
     private String seotitle;
     private String seokeywords;
     private String seodescription;
@@ -26,7 +25,7 @@ public class ProductCategory  extends  BaseEntity  {
     private ProductCategory parent;
     private Set<ProductCategory> children = new HashSet();
     //private Set<ParameterGroup> IIlIIllI = new HashSet();
-    @Expose private Set<Attribute> attributes = new HashSet();
+    private Set<Attribute> attributes = new HashSet();
     private Set<ParameterGroup> parametergroups = new HashSet();
 
     public ProductCategory(){

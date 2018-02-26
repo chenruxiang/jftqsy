@@ -24,4 +24,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product,String>
         super.setBaseDao(productRepository);
     }
 
+
+
+
 }

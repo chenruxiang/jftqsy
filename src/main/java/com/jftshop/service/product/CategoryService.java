@@ -13,5 +13,7 @@ public interface CategoryService extends BaseService<ProductCategory, String> {
 
     public ProductCategory getAttibuteByCategoryId(String id);
 
+    public ProductCategory getParametersByCategoryId(String id);
+
 
 }

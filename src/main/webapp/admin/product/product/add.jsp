@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form id="addform" action="<%=path%>/admin/product/attribute/save" method="post">
+<form id="addform" action="<%=path%>/admin/product/attribute/save" method="post" enctype="multipart/form-data">
 
 
 <div class="container">
@@ -72,6 +72,8 @@
 
         <div id="menu3" class="tab-pane fade">
 
+            <table id="parameterTable"></table>
+
         </div>
 
         <div id="menu4" class="tab-pane fade">
@@ -121,24 +123,20 @@
     }
 
 
-    // 删除商品图片
-    $deleteProductImage.live("click", function() {
-        var $this = $(this);
-        $.dialog({
-            type: "warn",
-            content: "删除",
-            onOk: function() {
-                $this.closest("tr").remove();
-            }
-        });
-    });
+
+
+
+    function refresh(){
+        loadAttribute();
+        loadParameter();
+    }
 
 
 
     // 加载属性
     function loadAttribute() {
         $.ajax({
-            url: "attributes.jhtml",
+            url: "<%=path%>/admin/product_category/getattibutebycategoryid",
             type: "GET",
             data: {id: $("#productcategoryid").val()},
             dataType: "json",
@@ -147,15 +145,45 @@
             },
             success: function(data) {
                 var trHtml = "";
+
                 $.each(data, function(i, attribute) {
+
                     var optionHtml = '<option value="">请选择<\/option>';
-                    $.each(attribute.options, function(j, option) {
-                        optionHtml += '<option value="' + option + '">' + option + '<\/option>';
+
+                    $.each(attribute.attributeoptions, function(j, option) {
+                        optionHtml += '<option value="' + option.options + '">' + option.options + '<\/option>';
                     });
 
-                    trHtml += '<tr><th>' + attribute.name + ': <\/th><td><select name="attribute_' + attribute.id + '">' + optionHtml + '<\/select><\/td><\/tr>';
+                    trHtml += '<tr><th>' + attribute.name +
+                              ': <\/th><td><select name="attribute_' + attribute.id + '">' + optionHtml + '<\/select><\/td><\/tr>';
+
                 });
+
                 $("#attributeTable").append(trHtml);
+            }
+        });
+    }
+
+    // 加载参数
+    function loadParameter() {
+        $.ajax({
+            url: "<%=path%>/admin/product_category/getparametersbycategoryid",
+            type: "GET",
+            data: {id: $("#productcategoryid").val()},
+            dataType: "json",
+            beforeSend: function() {
+                $("#parameterTable").empty();
+            },
+            success: function(data) {
+                var trHtml = "";
+                $.each(data, function(i, parameterGroup) {
+                    trHtml += '<tr><td style="text-align: right;"><strong>' + parameterGroup.name + ':<\/strong><\/td><td>&nbsp;<\/td><\/tr>';
+                    $.each(parameterGroup.parameters, function(i, parameter) {
+
+                        trHtml += '<tr><th>' + parameter.name + ': <\/th><td><input type="text" name="parameter_' + parameter.id + '" class="text" maxlength="200" \/><\/td> <\/tr>';
+                    });
+                });
+                $("#parameterTable").append(trHtml);
             }
         });
     }

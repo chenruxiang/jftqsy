@@ -61,7 +61,6 @@ public class ParameterGroup extends BaseEntity {
     }
 
     @OneToMany(mappedBy="parametergroup", fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonIgnore
     public List<Parameter> getParameters() {
         return this.parameters;
     }

@@ -89,7 +89,7 @@
        }
 </style>
 
-<!-- 模态框（Modal） -->
+<%--!-- 模态框（Modal） -->
 <div class="modal fade" id="myReloginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
        <div class="modal-dialog modal-sm">
               <div class="modal-content" style="width: 350px; ">
@@ -131,6 +131,8 @@
               </div><!-- /.modal-content -->
        </div><!-- /.modal -->
 </div>
+--%>
+
 
 <script type="text/javascript">
 

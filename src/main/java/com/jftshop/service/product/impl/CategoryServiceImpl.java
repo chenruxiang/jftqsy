@@ -41,4 +41,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<ProductCategory,String>
         return categoryRepository.getAttibuteByCategoryId(id);
     }
 
+    @Transactional(readOnly=true)
+    public ProductCategory getParametersByCategoryId(String id){
+        return categoryRepository.getParametersByCategoryId(id);
+    }
+
 }
