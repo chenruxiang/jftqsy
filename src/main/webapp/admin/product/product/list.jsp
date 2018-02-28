@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增商品','<%=path%>/admin/product/product/add.jsp')">新增商品</a>
+<p><a href="javascript:void(0)" onclick="window.parent.addTab('新增商品','<%=path%>/admin/product/add')">新增商品</a>
 
 
 

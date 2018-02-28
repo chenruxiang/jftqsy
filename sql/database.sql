@@ -135,26 +135,6 @@ CREATE TABLE `product` (
   `createdate` datetime NOT NULL default '0',
   `modifydate` datetime DEFAULT NULL,
   `allocatedstock` int(11) NOT NULL,
-  `attributevalue0` varchar(255) DEFAULT NULL,
-  `attributevalue1` varchar(255) DEFAULT NULL,
-  `attributevalue10` varchar(255) DEFAULT NULL,
-  `attributevalue11` varchar(255) DEFAULT NULL,
-  `attributevalue12` varchar(255) DEFAULT NULL,
-  `attributevalue13` varchar(255) DEFAULT NULL,
-  `attributevalue14` varchar(255) DEFAULT NULL,
-  `attributevalue15` varchar(255) DEFAULT NULL,
-  `attributevalue16` varchar(255) DEFAULT NULL,
-  `attributevalue17` varchar(255) DEFAULT NULL,
-  `attributevalue18` varchar(255) DEFAULT NULL,
-  `attributevalue19` varchar(255) DEFAULT NULL,
-  `attributevalue2` varchar(255) DEFAULT NULL,
-  `attributevalue3` varchar(255) DEFAULT NULL,
-  `attributevalue4` varchar(255) DEFAULT NULL,
-  `attributevalue5` varchar(255) DEFAULT NULL,
-  `attributevalue6` varchar(255) DEFAULT NULL,
-  `attributevalue7` varchar(255) DEFAULT NULL,
-  `attributevalue8` varchar(255) DEFAULT NULL,
-  `attributevalue9` varchar(255) DEFAULT NULL,
   `cost` decimal(21,6) DEFAULT NULL,
   `fullname` varchar(255) NOT NULL,
   `hits` bigint(20) NOT NULL,
@@ -225,6 +205,17 @@ CREATE TABLE `product_parameter_value` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table product_parameter_value comment '产品参数';
 
+CREATE TABLE `product_attribute_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
+  `attributevalue` varchar(255) DEFAULT NULL,
+  `attributevaluekey` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_attribute_value comment '产品属性';
+
 
 CREATE TABLE `goods` (
   `id` varchar(255) NOT NULL ,
@@ -233,6 +224,29 @@ CREATE TABLE `goods` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table product_parameter_value comment '货物';
+
+
+CREATE TABLE `product_specification` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `productid` varchar(255) NOT NULL,
+  `specifications` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `product_specification_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `products` bigint(20) NOT NULL,
+  `specification_values` bigint(20) NOT NULL,
+  PRIMARY KEY (`products`,`specification_values`),
+  KEY `FKBF71FF265096DE0F` (`products`),
+  KEY `FKBF71FF2677BD1CD0` (`specification_values`),
+  CONSTRAINT `FKBF71FF265096DE0F` FOREIGN KEY (`products`) REFERENCES `xx_product` (`id`),
+  CONSTRAINT `FKBF71FF2677BD1CD0` FOREIGN KEY (`specification_values`) REFERENCES `xx_specification_value` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

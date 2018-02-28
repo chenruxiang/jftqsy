@@ -6,7 +6,6 @@ import com.jftshop.entity.ProductImage;
 import com.jftshop.service.impl.BaseServiceImpl;
 import com.jftshop.service.product.ProductService;
 import com.jftshop.util.ImageUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.util.UUID;
 
@@ -23,10 +23,19 @@ import java.util.UUID;
 
 @Service("productService")
 public class ProductServiceImpl extends BaseServiceImpl<Product,String>
-        implements ProductService {
+        implements ProductService   {
 
     private static final String IIIllIlI = "jpg";
     private static final String IIIllIll = "image/jpeg";
+    private static  String picpath = "";
+
+    static {
+        String os = System.getProperty("os.name").toLowerCase();
+        if ( os.indexOf("windows") !=-1 ) picpath = "d:/upload";
+        if ( os.indexOf("linux") !=-1 ) picpath = "/upload";
+    }
+
+    private ServletContext servletContext;
 
     @Resource(name="taskExecutor")
     private TaskExecutor taskExecutor;
@@ -50,27 +59,25 @@ public class ProductServiceImpl extends BaseServiceImpl<Product,String>
             try
             {
 
-                String str1 = "/upload";
                 String str2 = UUID.randomUUID().toString();
 
-                String str3 = str1 + str2 + "-source." + FilenameUtils.getExtension(localMultipartFile.getOriginalFilename());
-                String str4 = str1 + str2 + "-large." + "jpg";
-                String str5 = str1 + str2 + "-medium." + "jpg";
-                String str6 = str1 + str2 + "-thumbnail." + "jpg";
+                String source = picpath + "/" + str2 + "/source." + FilenameUtils.getExtension(localMultipartFile.getOriginalFilename());
+                String large = picpath + "/" + str2 + "/large." + "jpg";
+                String medium = picpath + "/" + str2 + "/medium." + "jpg";
+                String thumbnail = picpath + "/" + str2 + "/thumbnail." + "jpg";
 
-                File localFile = new File(System.getProperty("java.io.tmpdir") + "/upload_" + UUID.randomUUID() + ".tmp");
+                File localFile = new File(source);
 
                 if (!localFile.getParentFile().exists())
                     localFile.getParentFile().mkdirs();
-
                 localMultipartFile.transferTo(localFile);
 
-                IIIllIlI(str3, str4, str5, str6, localFile, localMultipartFile.getContentType());
+                IIIllIlI( localFile , large, medium, thumbnail  );
 
-                productImage.setSource( str3 );
-                productImage.setLarge( str4 );
-                productImage.setMedium( str5 );
-                productImage.setThumbnail( str6 );
+                productImage.setSource( source );
+                productImage.setLarge( large );
+                productImage.setMedium( medium );
+                productImage.setThumbnail( thumbnail );
 
             }
             catch (Exception localException1)
@@ -80,11 +87,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product,String>
     }
 
 
-    private void IIIllIlI(String paramString1, String paramString2, String paramString3, String paramString4, File paramFile, String paramString5)
+    private void IIIllIlI( File srcFile , String large, String medium, String thumbnail )
     {
         try
         {
-            this.taskExecutor.execute( new aaa( this, paramFile, paramString1, paramString5, paramString2, paramString3, paramString4 ) );
+            this.taskExecutor.execute( new aaa(  srcFile, large, medium, thumbnail ) );
         }
         catch (Exception localException)
         {
@@ -97,60 +104,23 @@ public class ProductServiceImpl extends BaseServiceImpl<Product,String>
             implements Runnable
     {
 
-        File paramFile = null;
+        File srcFile = null;
+        String paramString1 = null;
+        String paramString2 = null;
+        String paramString3 = null;
 
-        aaa(ProductServiceImpl productServiceImpl, File paramFile, String paramString1, String paramString2, String paramString3, String paramString4, String paramString5)
+        aaa( File srcFile, String paramString1, String paramString2, String paramString3)
         {
-
-            this.paramFile = paramFile;
+            this.srcFile = srcFile;
+            this.paramString1 = paramString1;
+            this.paramString2 = paramString2;
+            this.paramString3 = paramString3;
         }
 
-        public void run()
-        {
-
-                    String str = System.getProperty("java.io.tmpdir");
-
-                    File localFile2 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");
-                    File localFile3 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");
-                    File localFile4 = new File(str + "/upload_" + UUID.randomUUID() + "." + "jpg");
-
-                    try
-                    {
-                        ImageUtils.zoom( paramFile, localFile2, 800, 800 );
-
-                        ImageUtils.zoom( paramFile, localFile3, 300, 300 );
-
-                        ImageUtils.zoom( paramFile, localFile4, 170, 170);
-
-                   /*     upload(this.IIIlllII, this.IIIllIll, this.IIIlllIl);
-                        upload(this.IIIllllI, localFile2, "image/jpeg");
-                        upload(this.IIIlllll, localFile3, "image/jpeg");
-                        upload(this.IIlIIIII, localFile4, "image/jpeg");*/
-
-                    }
-
-                    finally
-                    {
-                        FileUtils.deleteQuietly(paramFile);
-                        FileUtils.deleteQuietly(localFile2);
-                        FileUtils.deleteQuietly(localFile3);
-                        FileUtils.deleteQuietly(localFile4);
-                    }
-        }
-
-        public void upload(String path, File file, String contentType)
-        {
-         /*   File localFile = new File(this.IIIllIlI.getRealPath(path));
-            try
-            {
-                FileUtils.moveFile(file, localFile);
-            }
-            catch (IOException localIOException)
-            {
-                localIOException.printStackTrace();
-            }*/
+        public void run(){
+            ImageUtils.zoom( srcFile, new File(paramString1) , 800, 800 );
+            ImageUtils.zoom( srcFile, new File(paramString2), 300, 300 );
+            ImageUtils.zoom( srcFile, new File(paramString3), 170, 170);
         }
     }
-
-
 }

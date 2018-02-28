@@ -13,8 +13,6 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.transaction.Transactional;
 
-import java.util.List;
-
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -24,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 public class TestParameter {
+
     @Autowired
     CategoryService categoryService;
 
