@@ -28,17 +28,25 @@ public class TestSpecification {
 
         Specification specification = new Specification();
         specification.setId( JFTStringUtils.get32UUID() );
-        specification.setName( "SpecificationName");
-        specification.setType(Specification.Type.text);
-        specification.setMemo("setMemo");
-        specification.setOrders(11);
+        specification.setName( "尺寸");
+        specification.setType(Specification.Type.image);
+        specification.setMemo("男装");
+        specification.setOrders(3);
 
         SpecificationValue specificationValue = new SpecificationValue();
         specificationValue.setId( JFTStringUtils.get32UUID() );
-        specificationValue.setName( "specificationValue" );
+        specificationValue.setName( "均码" );
+        specificationValue.setImage("www.baidu.com");
         specificationValue.setSpecification( specification );
 
+        SpecificationValue specificationValue2 = new SpecificationValue();
+        specificationValue2.setId( JFTStringUtils.get32UUID() );
+        specificationValue2.setName( "XL" );
+        specificationValue2.setImage("www.qq.com");
+        specificationValue2.setSpecification( specification );
+
         specification.getSpecificationValues().add( specificationValue );
+        specification.getSpecificationValues().add( specificationValue2 );
 
         specificationService.save( specification );
 
