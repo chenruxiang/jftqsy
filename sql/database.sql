@@ -171,7 +171,7 @@ CREATE TABLE `product` (
   `weeksalesdate` datetime NOT NULL,
   `weight` int(11) DEFAULT NULL,
   `brand` varchar(255) DEFAULT NULL,
-  `goods` varchar(255) NOT NULL,
+  `goodsid` varchar(255) NOT NULL,
   `productcategoryid` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -241,11 +241,7 @@ CREATE TABLE `product_specification_value` (
   `modifydate` datetime DEFAULT NULL,
   `products` bigint(20) NOT NULL,
   `specification_values` bigint(20) NOT NULL,
-  PRIMARY KEY (`products`,`specification_values`),
-  KEY `FKBF71FF265096DE0F` (`products`),
-  KEY `FKBF71FF2677BD1CD0` (`specification_values`),
-  CONSTRAINT `FKBF71FF265096DE0F` FOREIGN KEY (`products`) REFERENCES `xx_product` (`id`),
-  CONSTRAINT `FKBF71FF2677BD1CD0` FOREIGN KEY (`specification_values`) REFERENCES `xx_specification_value` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -54,7 +54,7 @@ public class Product extends  BaseEntity {
     private Date weeksalesdate;
     private Integer weight;
     private String brand;
-    private String goods;
+    private Goods goods;
     private ProductCategory productcategory;
 
     private List<ProductImage> productimages = new ArrayList();
@@ -366,11 +366,14 @@ public class Product extends  BaseEntity {
         this.brand = brand;
     }
 
-    public String getGoods() {
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="goodsid")
+    @JsonIgnore
+    public Goods getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
+    public void setGoods(Goods goods) {
         this.goods = goods;
     }
 

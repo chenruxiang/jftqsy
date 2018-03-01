@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class ProductController {
 
 
     @PostMapping("/save")
-    public String save(Product product , String productcategoryid , Long[] specificationIds , HttpServletRequest request) {
+    public String save(Product product , String productcategoryid , String[] specificationIds , HttpServletRequest request) {
 
         Product product1 = product;
 
@@ -107,7 +108,7 @@ public class ProductController {
             while (attributeoptions.hasNext())
             {
                 AttributeOption attributeoption = attributeoptions.next();
-                String aps = request.getParameter("attributeoption_" + attributeoption.getId());
+                String aps = request.getParameter("attribute_" + attributeoption.getId());
                 if ( StringUtils.isNotEmpty(aps) ) {
                     ProductAttribute ap = new ProductAttribute();
                     ap.setId(JFTStringUtils.get32UUID() );
@@ -118,9 +119,35 @@ public class ProductController {
             }
         }
 
+        Goods goods = new Goods();
+        ArrayList arraylist = new ArrayList();
+
+        if ((specificationIds != null) && (specificationIds.length > 0)){
+            for (int i = 0; i < specificationIds.length; i++)
+            {
+                Specification specification = (Specification)this.specificationService.getOne(specificationIds[i]);
+                String[] specifications = request.getParameterValues("specification_" + specification.getId());
+                if ((specifications != null) && (specifications.length > 0)){
+                    for (int j = 0; j < specifications.length; j++){
+                        if (i == 0)
+                            if (j == 0)
+                            {
+                                product.setGoods(goods);
+                    /*            product(new HashSet());
+                                product.setSpecificationValues(new HashSet());*/
+                                arraylist.add(product);
+                            }
+                            else
+                            {
 
 
+                            }
 
+                    }
+                }
+
+            }
+        }
 
         return "";
     }

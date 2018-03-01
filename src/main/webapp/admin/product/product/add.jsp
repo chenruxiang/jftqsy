@@ -5,11 +5,37 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.jftshop.entity.SpecificationValue" %>
 <%@ include file="/common/lte.jsp"%>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Title</title>
 </head>
 <body>
+
+
+<style type="text/css">
+    .specificationSelect {
+        height: 100px;
+        padding: 5px;
+        overflow-y: scroll;
+        border: 1px solid #cccccc;
+    }
+
+    .specificationSelect li {
+        float: left;
+        min-width: 150px;
+        _width: 200px;
+    }
+
+    .hidden1 {
+        display:none;
+    }
+
+    table.input {
+        width: 100%;
+        word-break: break-all;
+    }
+
+</style>
 
 <form id="addform" action="<%=path%>/admin/product/save" method="post" enctype="multipart/form-data">
 
@@ -34,7 +60,7 @@
 
 
             <span class="requiredField">*</span>名称：
-            <input type="text" id="name" name="name" required/>
+            <input type="text" id="name" name="name" required />
             <br>
 
             编号
@@ -87,21 +113,22 @@
 
         <div id="menu5" class="tab-pane fade">
 
-            <div id="specificationSelect"><br>
+            <div id="specificationSelect" class="specificationSelect"><br>
                 <%
                     Iterator<Specification> iterator = ((List)request.getAttribute("specifications")).iterator();
                     while (iterator.hasNext()){
                         Specification specification = iterator.next();
                         out.write( "<input type=\"checkbox\" " +
                                 "name=\"specificationIds\" " +
-                                "value="+specification.getId()+"/>"+specification.getName()+"/"+specification.getMemo()+"&nbsp;");
+                                "value="+specification.getId()+">"+specification.getName()+"/"+specification.getMemo()+"&nbsp;");
                     }
                 %>
             </div>
             <br>
             <a href="javascript:;" id="addSpecificationProduct" class="button">增加规格商品</a>
 
-            <table id="specificationProductTable">
+
+            <table id="specificationProductTable" class="input">
                 <tr class="title">
                     <td width="60">
                         &nbsp;
@@ -110,7 +137,7 @@
                         Iterator<Specification> specifiterator = ((List)request.getAttribute("specifications")).iterator();
                         while (specifiterator.hasNext()){
                             Specification specification = specifiterator.next();
-                            out.write( "<td class=\"specification_"+specification.getId() +" hidden\">" +
+                            out.write( "<td class=\"specification_"+specification.getId() +" hidden1\">" +
                                             specification.getName() +"/"+specification.getMemo() + "</td>" );
                         }
                     %>
@@ -119,7 +146,7 @@
                     </td>
                 </tr>
 
-                <tr class="hidden">
+                <tr class="hidden1">
                     <td>
                         &nbsp;
                     </td>
@@ -128,7 +155,7 @@
                         Iterator<Specification> iterator3 = ((List)request.getAttribute("specifications")).iterator();
                         while (iterator3.hasNext()){
                             Specification specification = iterator3.next();
-                            out.write("<td class=\"specification_"+specification.getId()+" hidden\">"+
+                            out.write("<td class=\"specification_"+specification.getId()+" hidden1\">"+
                                       "<select name=\"specification_"+specification.getId()+"\" disabled=\"disabled\">");
 
                             Iterator<SpecificationValue> iterator4 =  specification.getSpecificationValues().iterator();
@@ -139,8 +166,9 @@
                             out.write("</select></td>");
                         }
                     %>
+
                     <td>
-                        <a href="javascript:;" class="deleteSpecificationProduct">删除</a>
+                        <a href="javascript:void(0);" onclick="delone(this)">删除</a>
                     </td>
                 </tr>
 
@@ -162,14 +190,30 @@
 
 <script type="text/javascript">
 
-    $(function(){
+    $().ready(function() {
 
         var $addSpecificationProduct = $("#addSpecificationProduct");
         var $specificationProductTable = $("#specificationProductTable");
         var $specificationIds = $("#specificationSelect :checkbox");
+        var $deleteSpecificationProduct = $("a.deleteSpecificationProduct");
 
         KindEditor.ready(function(K) {
             window.editor = K.create('#editor_id');
+        });
+
+        // 修改商品规格
+        $specificationIds.click(function() {
+            if ($specificationIds.filter(":checked").size() == 0) {
+                $specificationProductTable.find("tr:gt(1)").remove();
+            }
+            var $this = $(this);
+
+            if ($this.prop("checked")) {
+
+                $specificationProductTable.find("td.specification_" + $this.val()).show().find("select").prop("disabled", false);
+            } else {
+                $specificationProductTable.find("td.specification_" + $this.val()).hide().find("select").prop("disabled", true);
+            }
         });
 
 
@@ -180,15 +224,11 @@
                 alert("没有添加规格");
                 return false;
             }
-
             if ($specificationProductTable.find("tr:gt(1)").size() == 0) {
-                alert("1");
                 $tr = $specificationProductTable.find("tr:eq(1)").clone().show().appendTo($specificationProductTable);
                 $tr.find("td:first").text("当前规格");
                 $tr.find("td:last").text("-");
             } else {
-                alert("2");
-                alert($specificationProductTable.find("tr:eq(1)"));
                 $specificationProductTable.find("tr:eq(1)").clone().show().appendTo($specificationProductTable);
             }
         });
@@ -271,6 +311,10 @@
     }
 
 
-
+    // 删除规格商品
+    function delone(aa) {
+        var $this = $(aa);
+        $this.parent().parent().remove();
+    }
 
 </script>

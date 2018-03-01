@@ -1,8 +1,10 @@
 package com.jftshop.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by ThinkPad on 2018/2/26.
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 public class Goods extends  BaseEntity {
 
     private String id;
+    private Set<Product> products = new HashSet();
 
     @Id
     public String getId() {
@@ -21,5 +24,15 @@ public class Goods extends  BaseEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @OneToMany(mappedBy="goods", fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
