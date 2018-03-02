@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,34 +49,33 @@ public class ProductController {
     @PostMapping("/save")
     public String save(Product product , String productcategoryid , String[] specificationIds , HttpServletRequest request) {
 
-        Product product1 = product;
+        //查询产品目录
+        ProductCategory productCategory = categoryService.getOne( productcategoryid );
+        //设置产品目录
+        product.setProductcategory(  productCategory ) ;
+
+        Specification specification = specificationService.getOne("d5d942adb0534ab48b5b0e559ab0695a");
+        List<SpecificationValue> list = specification.getSpecificationValues();
+
+        Specification specification2 = specificationService.getOne("da829783c94d44f396ccb3646d6affba");
+        List<SpecificationValue> list2 = specification2.getSpecificationValues();
 
         //校验上传的图片
         Iterator<ProductImage> productimages = product.getProductimages().iterator();
         while ( productimages.hasNext() )
         {
             ProductImage productimage = productimages.next();
-            if ((productimage == null) )
+            if ( productimage == null )
             {
                 productimages.remove();
+            }else{
+                this.productService.build( productimage );
+                productimage.setId( JFTStringUtils.get32UUID() );
+                productimage.setProduct( product );
+                //设置主图
+                product.setImage(productimage.getThumbnail());
             }
-            this.productService.build(productimage);
-             //设置主图
-            product.setImage(productimage.getThumbnail());
         }
-
-
-        //设置产品目录
-        product.setProductcategory(   categoryService.getOne( productcategoryid ) ) ;
-
-        product.setFullname(null);
-        product.setAllocatedstock( Integer.valueOf(0) );
-        product.setScore( Float.valueOf(0.0F) );
-        product.setHits(Long.valueOf(0L));
-        product.setSales(Long.valueOf(0L));
-
-
-        ProductCategory productCategory = product.getProductcategory();
 
 
         //产品参数处理
@@ -95,6 +94,7 @@ public class ProductController {
                     pp.setId(JFTStringUtils.get32UUID() );
                     pp.setParametervaluekey( parametergroup.getName() );
                     pp.setParametervalue( pv );
+                    pp.setProduct( product );
                     product.getProductparameters().add(pp);
                 }
             }
@@ -114,40 +114,98 @@ public class ProductController {
                     ap.setId(JFTStringUtils.get32UUID() );
                     ap.setAttributevalue(aps);
                     ap.setAttributevaluekey(attribute.getName());
+                    ap.setProduct( product );
                     product.getProductattributes().add(ap);
                 }
             }
         }
 
-        Goods goods = new Goods();
-        ArrayList arraylist = new ArrayList();
 
-        if ((specificationIds != null) && (specificationIds.length > 0)){
-            for (int i = 0; i < specificationIds.length; i++)
-            {
-                Specification specification = (Specification)this.specificationService.getOne(specificationIds[i]);
-                String[] specifications = request.getParameterValues("specification_" + specification.getId());
-                if ((specifications != null) && (specifications.length > 0)){
-                    for (int j = 0; j < specifications.length; j++){
-                        if (i == 0)
-                            if (j == 0)
-                            {
-                                product.setGoods(goods);
-                    /*            product(new HashSet());
-                                product.setSpecificationValues(new HashSet());*/
-                                arraylist.add(product);
-                            }
-                            else
-                            {
+        product.setId(JFTStringUtils.get32UUID());
+        product.setIntroduction("hello");
+        product.setIsgift(true);
+        product.setIslist(true);
+        product.setIsmarketable(true);
+        product.setIstop(true);
+        product.setName("hello");
+        product.setPrice(new BigDecimal(100));
 
 
-                            }
 
+        ProductSpecification productspecification = new ProductSpecification();
+        productspecification.setId(JFTStringUtils.get32UUID());
+        productspecification.setName( specification.getName() );
+        productspecification.setType(ProductSpecification.Type.text);
+
+        Iterator<SpecificationValue> iterator = list.iterator();
+        while ( iterator.hasNext() ){
+            SpecificationValue specificationvalue = iterator.next();
+
+            ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
+            productspecificationvalue.setId(JFTStringUtils.get32UUID());
+            productspecificationvalue.setName( specificationvalue.getName() );
+            productspecification.getProductspecificationvalues().add( productspecificationvalue );
+            productspecificationvalue.setProductspecification( productspecification );
+        }
+
+        product.getProductspecifications().add( productspecification );
+        productspecification.setProduct( product );
+
+        ProductSpecification productspecification2 = new ProductSpecification();
+        productspecification2.setId(JFTStringUtils.get32UUID());
+        productspecification2.setName( specification2.getName() );
+        productspecification2.setType(ProductSpecification.Type.text);
+
+        Iterator<SpecificationValue> iterator2 = list2.iterator();
+        while ( iterator2.hasNext() ){
+            SpecificationValue specificationvalue = iterator2.next();
+
+            ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
+            productspecificationvalue.setId(JFTStringUtils.get32UUID());
+            productspecificationvalue.setName( specificationvalue.getName() );
+            productspecification2.getProductspecificationvalues().add( productspecificationvalue );
+            productspecificationvalue.setProductspecification( productspecification2 );
+        }
+
+        product.getProductspecifications().add( productspecification2 );
+        productspecification2.setProduct( product );
+
+
+        int size = product.getProductspecifications().size();
+
+        if (size>0 && size==1){
+            List<ProductSpecificationValue> list7 = product.getProductspecifications().get(0).getProductspecificationvalues();
+            if ( list7.size() > 0 ){
+                for (int i = 0 ; i < list7.size() ; i ++){
+                    ProductSpecificationValue productspecificationvalue =  list7.get(i);
+                    ProductSku productsku = new ProductSku();
+                    productsku.setId(JFTStringUtils.get32UUID());
+                    productsku.setProductspecificationvalueid1( productspecificationvalue.getId() );
+                    product.getProductskus().add( productsku );
+                    productsku.setProduct( product );
+                }
+            }
+        }else{
+            List<ProductSpecificationValue> list7 = product.getProductspecifications().get(0).getProductspecificationvalues();
+            List<ProductSpecificationValue> list8 = product.getProductspecifications().get(1).getProductspecificationvalues();
+            if ( list7.size() > 0 ){
+                for ( int i = 0 ; i < list7.size() ; i ++ ){
+                    ProductSpecificationValue productspecificationvalue =  list7.get(i);
+
+                    for ( int j = 0 ; j < list8.size() ; j ++ ){
+                        ProductSpecificationValue productspecificationvalue2 =  list8.get(j);
+                        ProductSku productsku = new ProductSku();
+                        productsku.setId(JFTStringUtils.get32UUID());
+                        productsku.setProductspecificationvalueid1( productspecificationvalue.getId() );
+                        productsku.setProductspecificationvalueid2( productspecificationvalue2.getId() );
+                        product.getProductskus().add( productsku );
+                        productsku.setProduct( product );
                     }
                 }
-
             }
         }
+
+        product.setProductcategory( productCategory );
 
         return "";
     }

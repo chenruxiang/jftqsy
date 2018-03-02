@@ -128,50 +128,59 @@ CREATE TABLE `specification_value` (
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table specification_value comment '规格值';
 
+CREATE TABLE `product_specification` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL,
+  `productid` varchar(255) NOT NULL ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_specification comment '产品规格';
 
+
+CREATE TABLE `product_specification_value` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `orders` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `productspecificationid` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_specification comment '产品规格值';
+
+CREATE TABLE `product_sku` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `allocatedstock` int(11) DEFAULT 0,
+  `sn` varchar(255) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `stockmemo` varchar(255) DEFAULT NULL,
+  `productspecificationvalueid1` varchar(255) DEFAULT NULL,
+  `productspecificationvalueid2` varchar(255) DEFAULT NULL,
+  `productid` varchar(255) NOT NULL ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table product_sku comment '产品规格SKU';
 
 CREATE TABLE `product` (
   `id` varchar(255) NOT NULL ,
   `createdate` datetime NOT NULL default '0',
   `modifydate` datetime DEFAULT NULL,
-  `allocatedstock` int(11) NOT NULL,
-  `cost` decimal(21,6) DEFAULT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `hits` bigint(20) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `introduction` longtext,
   `isgift` bit(1) NOT NULL,
   `islist` bit(1) NOT NULL,
   `ismarketable` bit(1) NOT NULL,
   `istop` bit(1) NOT NULL,
-  `keyword` varchar(255) DEFAULT NULL,
-  `marketprice` decimal(21,6) NOT NULL,
-  `memo` varchar(255) DEFAULT NULL,
-  `monthhits` bigint(20) NOT NULL,
-  `monthhitsdate` datetime NOT NULL,
-  `monthsales` bigint(20) NOT NULL,
-  `monthsalesdate` datetime NOT NULL,
   `name` varchar(255) NOT NULL,
-  `point` bigint(20) NOT NULL,
   `price` decimal(21,6) NOT NULL,
-  `sales` bigint(20) NOT NULL,
-  `score` float NOT NULL,
-  `scorecount` bigint(20) NOT NULL,
-  `seodescription` varchar(255) DEFAULT NULL,
-  `seokeywords` varchar(255) DEFAULT NULL,
-  `seotitle` varchar(255) DEFAULT NULL,
-  `sn` varchar(255) NOT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `stockmemo` varchar(255) DEFAULT NULL,
-  `totalscore` bigint(20) NOT NULL,
-  `unit` varchar(255) DEFAULT NULL,
-  `weekhits` bigint(20) NOT NULL,
-  `weekhitsdate` datetime NOT NULL,
-  `weeksales` bigint(20) NOT NULL,
-  `weeksalesdate` datetime NOT NULL,
-  `weight` int(11) DEFAULT NULL,
-  `brand` varchar(255) DEFAULT NULL,
-  `goodsid` varchar(255) NOT NULL,
   `productcategoryid` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -217,32 +226,7 @@ CREATE TABLE `product_attribute_value` (
 alter table product_attribute_value comment '产品属性';
 
 
-CREATE TABLE `goods` (
-  `id` varchar(255) NOT NULL ,
-  `createdate` datetime NOT NULL default '0',
-  `modifydate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-alter table product_parameter_value comment '货物';
 
-
-CREATE TABLE `product_specification` (
-  `id` varchar(255) NOT NULL ,
-  `createdate` datetime NOT NULL default '0',
-  `modifydate` datetime DEFAULT NULL,
-  `productid` varchar(255) NOT NULL,
-  `specifications` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `product_specification_value` (
-  `id` varchar(255) NOT NULL ,
-  `createdate` datetime NOT NULL default '0',
-  `modifydate` datetime DEFAULT NULL,
-  `products` bigint(20) NOT NULL,
-  `specification_values` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
