@@ -269,7 +269,7 @@
                         {"name":"商品属性","url":"<%=path%>/admin/product/attribute/listall"},
                         {"name":"规格管理","url":"<%=path%>/admin/product/specification/listall"},
                         {"name":"品牌管理","url":"<%=path%>/admin/brand/listBrand"},
-                        {"name":"商品管理","url":"<%=path%>/admin/product/product/list.jsp"}
+                        {"name":"商品管理","url":"<%=path%>/admin/product/listall"}
             ]},
             {"name":"menu1","url":"#","submenu":[{"name":"menu1","url":"#"}]}
         ]

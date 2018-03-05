@@ -54,11 +54,12 @@ public class ProductController {
         //设置产品目录
         product.setProductcategory(  productCategory ) ;
 
-        Specification specification = specificationService.getOne("d5d942adb0534ab48b5b0e559ab0695a");
-        List<SpecificationValue> list = specification.getSpecificationValues();
-
-        Specification specification2 = specificationService.getOne("da829783c94d44f396ccb3646d6affba");
-        List<SpecificationValue> list2 = specification2.getSpecificationValues();
+        product.setId(JFTStringUtils.get32UUID());
+        product.setIsgift(true);
+        product.setIslist(true);
+        product.setIsmarketable(true);
+        product.setIstop(true);
+        product.setPrice(new BigDecimal(100));
 
         //校验上传的图片
         Iterator<ProductImage> productimages = product.getProductimages().iterator();
@@ -121,59 +122,45 @@ public class ProductController {
         }
 
 
-        product.setId(JFTStringUtils.get32UUID());
-        product.setIntroduction("hello");
-        product.setIsgift(true);
-        product.setIslist(true);
-        product.setIsmarketable(true);
-        product.setIstop(true);
-        product.setName("hello");
-        product.setPrice(new BigDecimal(100));
 
+        if ( specificationIds == null  || specificationIds.length == 0 ){
 
+             return "error";
 
-        ProductSpecification productspecification = new ProductSpecification();
-        productspecification.setId(JFTStringUtils.get32UUID());
-        productspecification.setName( specification.getName() );
-        productspecification.setType(ProductSpecification.Type.text);
+        }else{
 
-        Iterator<SpecificationValue> iterator = list.iterator();
-        while ( iterator.hasNext() ){
-            SpecificationValue specificationvalue = iterator.next();
+           for (String sid : specificationIds){
 
-            ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
-            productspecificationvalue.setId(JFTStringUtils.get32UUID());
-            productspecificationvalue.setName( specificationvalue.getName() );
-            productspecification.getProductspecificationvalues().add( productspecificationvalue );
-            productspecificationvalue.setProductspecification( productspecification );
+               Specification specification = specificationService.getOne(sid);
+               List<SpecificationValue> list = specification.getSpecificationValues();
+
+               ProductSpecification productspecification = new ProductSpecification();
+               productspecification.setId(JFTStringUtils.get32UUID());
+               productspecification.setName( specification.getName() );
+               productspecification.setType(ProductSpecification.Type.text);
+
+               Iterator<SpecificationValue> iterator = list.iterator();
+               while ( iterator.hasNext() ){
+                   SpecificationValue specificationvalue = iterator.next();
+
+                   ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
+                   productspecificationvalue.setId(JFTStringUtils.get32UUID());
+                   productspecificationvalue.setName( specificationvalue.getName() );
+                   productspecification.getProductspecificationvalues().add( productspecificationvalue );
+                   productspecificationvalue.setProductspecification( productspecification );
+               }
+
+               product.getProductspecifications().add( productspecification );
+               productspecification.setProduct( product );
+
+           }
+
         }
-
-        product.getProductspecifications().add( productspecification );
-        productspecification.setProduct( product );
-
-        ProductSpecification productspecification2 = new ProductSpecification();
-        productspecification2.setId(JFTStringUtils.get32UUID());
-        productspecification2.setName( specification2.getName() );
-        productspecification2.setType(ProductSpecification.Type.text);
-
-        Iterator<SpecificationValue> iterator2 = list2.iterator();
-        while ( iterator2.hasNext() ){
-            SpecificationValue specificationvalue = iterator2.next();
-
-            ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
-            productspecificationvalue.setId(JFTStringUtils.get32UUID());
-            productspecificationvalue.setName( specificationvalue.getName() );
-            productspecification2.getProductspecificationvalues().add( productspecificationvalue );
-            productspecificationvalue.setProductspecification( productspecification2 );
-        }
-
-        product.getProductspecifications().add( productspecification2 );
-        productspecification2.setProduct( product );
 
 
         int size = product.getProductspecifications().size();
 
-        if (size>0 && size==1){
+        if ( size > 0 && size == 1 ){
             List<ProductSpecificationValue> list7 = product.getProductspecifications().get(0).getProductspecificationvalues();
             if ( list7.size() > 0 ){
                 for (int i = 0 ; i < list7.size() ; i ++){
@@ -186,8 +173,10 @@ public class ProductController {
                 }
             }
         }else{
+
             List<ProductSpecificationValue> list7 = product.getProductspecifications().get(0).getProductspecificationvalues();
             List<ProductSpecificationValue> list8 = product.getProductspecifications().get(1).getProductspecificationvalues();
+
             if ( list7.size() > 0 ){
                 for ( int i = 0 ; i < list7.size() ; i ++ ){
                     ProductSpecificationValue productspecificationvalue =  list7.get(i);
@@ -205,9 +194,9 @@ public class ProductController {
             }
         }
 
-        product.setProductcategory( productCategory );
+        productService.save( product );
 
-        return "";
+        return "admin/product/listall";
     }
 
 
