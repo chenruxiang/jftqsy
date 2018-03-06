@@ -11,6 +11,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.persistence.Transient;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -53,6 +54,9 @@ public class MemberServiceImpl implements MemberService {
         }
         return null;
     }
+
+
+
 
 
     @Autowired

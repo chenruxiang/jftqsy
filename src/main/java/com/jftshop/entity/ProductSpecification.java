@@ -88,4 +88,5 @@ public class ProductSpecification extends BaseEntity {
         this.productspecificationvalues = productspecificationvalues;
     }
 
+
 }

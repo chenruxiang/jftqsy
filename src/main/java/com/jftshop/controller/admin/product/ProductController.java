@@ -129,31 +129,41 @@ public class ProductController {
 
         }else{
 
-           for (String sid : specificationIds){
+            //这里需要确保前台传过来和后台的顺序一致 由specification的orders决定 ，由1-N,
+            //它将配合productsku的 productspecificationvalueid1 和 productspecificationvalueid2  查询库存SKU使用
+           //for ( String sid : specificationIds ){
+            for ( int i = 0 ; i <  specificationIds.length ; i ++ ) {
 
-               Specification specification = specificationService.getOne(sid);
-               List<SpecificationValue> list = specification.getSpecificationValues();
+                String sid = specificationIds[i];
+                Specification specification = specificationService.getOne(sid);
 
-               ProductSpecification productspecification = new ProductSpecification();
-               productspecification.setId(JFTStringUtils.get32UUID());
-               productspecification.setName( specification.getName() );
-               productspecification.setType(ProductSpecification.Type.text);
+                List<SpecificationValue> list = specification.getSpecificationValues();
 
-               Iterator<SpecificationValue> iterator = list.iterator();
-               while ( iterator.hasNext() ){
-                   SpecificationValue specificationvalue = iterator.next();
+                ProductSpecification productspecification = new ProductSpecification();
+                productspecification.setId(JFTStringUtils.get32UUID());
+                productspecification.setName( specification.getName() );
+                productspecification.setType(ProductSpecification.Type.text);
 
-                   ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
-                   productspecificationvalue.setId(JFTStringUtils.get32UUID());
-                   productspecificationvalue.setName( specificationvalue.getName() );
-                   productspecification.getProductspecificationvalues().add( productspecificationvalue );
-                   productspecificationvalue.setProductspecification( productspecification );
-               }
+                //注意这里的顺序
+                productspecification.setOrders( i + 1 );
 
-               product.getProductspecifications().add( productspecification );
-               productspecification.setProduct( product );
+                Iterator<SpecificationValue> iterator = list.iterator();
 
-           }
+                    while ( iterator.hasNext() ){
+                    SpecificationValue specificationvalue = iterator.next();
+
+                    ProductSpecificationValue productspecificationvalue = new ProductSpecificationValue();
+                    productspecificationvalue.setId(JFTStringUtils.get32UUID());
+                    productspecificationvalue.setName( specificationvalue.getName() );
+                    productspecification.getProductspecificationvalues().add( productspecificationvalue );
+                    productspecificationvalue.setProductspecification( productspecification );
+
+                }
+
+                product.getProductspecifications().add( productspecification );
+                productspecification.setProduct( product );
+
+            }
 
         }
 

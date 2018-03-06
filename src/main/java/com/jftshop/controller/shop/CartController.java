@@ -25,12 +25,13 @@ public class CartController {
 
     @PostMapping(value={"/add"})
     @ResponseBody
-    public Message add(String id, Integer quantity, HttpServletRequest request, HttpServletResponse response)
+    public Message add(String productid, String productskuid, Integer quantity,
+                       HttpServletRequest request, HttpServletResponse response)
     {
         if ((quantity == null) || (quantity.intValue() < 1))
             return Message.error("商品数量错误", new Object[0]);
 
-        Product product = productService.getOne( id );
+        Product product = productService.getOne( productid );
 
         if (product == null)
             return Message.warn("商品不存在", new Object[0]);

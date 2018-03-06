@@ -1,8 +1,9 @@
-import com.jftshop.entity.*;
+import com.jftshop.dao.product.ProductSkuRepository;
+import com.jftshop.entity.Product;
+import com.jftshop.entity.ProductSku;
 import com.jftshop.service.product.CategoryService;
 import com.jftshop.service.product.ProductService;
 import com.jftshop.service.product.SpecificationService;
-import com.jftshop.util.JFTStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class TestProduct {
 
 
 
-    @Test
+   /* @Test
     @Transactional
     public void  test() throws Exception {
 
@@ -129,8 +128,36 @@ public class TestProduct {
 
         productService.save( product );
 
+    }*/
+
+    @Test
+    @Transactional
+    public void  test() throws Exception {
+
+        String p1 = "";
+        String p2 = "";
+
+        Product product =  productService.getOne("ba6ed5275a0348d19ad633338f00035a");
+
+        p1 = product.getProductSpecificationsSortByOrders().get(0).getProductspecificationvalues().get(0).getId();
+        p2 = product.getProductSpecificationsSortByOrders().get(1).getProductspecificationvalues().get(0).getId();
+        System.out.println("---------------------------");
+        System.out.println(p1);
+        System.out.println(p2);
+
+        List<ProductSku> list = productskurepository.findByP1P2( p1 , p2);
+        System.out.println(list.get(0).getId());
+    /*    while (iterator.hasNext()){
+            ProductSpecification productspecification = iterator.next();
+            System.out.println("---------------------------");
+            p1 = productspecification.getProductspecificationvalues().get(0).getId();
+            System.out.println(productspecification.getProductspecificationvalues().get(0).getId());
+        }*/
+
     }
 
+    @Autowired
+    ProductSkuRepository productskurepository;
 
     @Autowired
     SpecificationService specificationService;

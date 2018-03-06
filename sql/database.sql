@@ -132,7 +132,7 @@ CREATE TABLE `product_specification` (
   `id` varchar(255) NOT NULL ,
   `createdate` datetime NOT NULL default '0',
   `modifydate` datetime DEFAULT NULL,
-  `orders` int(11) DEFAULT NULL,
+  `orders` int(11) NOT NULL default 1,
   `memo` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `type` int(11) NOT NULL,

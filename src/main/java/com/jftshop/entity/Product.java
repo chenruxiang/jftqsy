@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -164,6 +166,22 @@ public class Product extends  BaseEntity {
 
     public void setProductspecifications(List<ProductSpecification> productspecifications) {
         this.productspecifications = productspecifications;
+    }
+
+    @Transient
+    public List<ProductSpecification> getProductSpecificationsSortByOrders(){
+        List<ProductSpecification> list = this.getProductspecifications();
+        if ( list != null ){
+            Collections.sort( list , new SortByOrders());
+        }
+        return list;
+    }
+
+    //按Orders升序
+    protected class SortByOrders implements Comparator<ProductSpecification>{
+        public int compare(ProductSpecification o1, ProductSpecification o2) {
+            return o1.getOrders().compareTo(o2.getOrders());
+        }
     }
 
 }

@@ -30,11 +30,13 @@
         out.write("商品名字：&nbsp;&nbsp;");
         out.write(product.getName());
         out.write("<br>规格---------------------------<br>");
+
         Iterator<ProductSpecification> iterator = product.getProductspecifications().iterator();
 
         int count = 0;
 
         while (iterator.hasNext()){
+
             ProductSpecification productspecification = iterator.next();
 
             out.write(productspecification.getName());
@@ -59,11 +61,14 @@
 
 购买数量:<input type="text" id="quantity" name="quantity" value="1">件
 
+<input type="hidden " id="productskuid" name="productskuid" value="">
+
 <br>
 
 <a href="void(0)" onclick="addCart()"  >加入购物车</a>
 
 <script type="text/javascript">
+
     $().ready(function() {
 
 
@@ -74,14 +79,14 @@
     // 加入购物车
     function addCart() {
 
-
         var quantity = $("#quantity").val();
+        var productskuid = $("#productskuid").val();
 
         if (/^\d*[1-9]\d*$/.test(quantity) && parseInt(quantity) > 0) {
             $.ajax({
                 url: "<%=path%>/cart/add",
                 type: "POST",
-                data: {id: <%=product.getId()%>, quantity: quantity},
+                data: {productid: <%=product.getId()%> , productskuid:productskuid , quantity: quantity},
                 dataType: "json",
                 cache: false,
                 success: function(message) {
@@ -89,7 +94,7 @@
                 }
             });
         } else {
-            alert("数量输入数字");
+            alert("数量输入数字 或 选择库存规格");
         }
     }
 
