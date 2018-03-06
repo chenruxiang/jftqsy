@@ -24,13 +24,13 @@ public class TestMember {
 
         Member member = new Member();
         member.setId( JFTStringUtils.get32UUID() );
-        member.setUsername( "hello234" );
+        member.setUsername( "chenchen" );
         member.setPassword( "setPassword" );
         member.setEmail("jjj@163.com");
 
         memberRepository.save( member );
 
-        List<Member> list = memberRepository.findByUsername( "hello234" );
+        List<Member> list = memberRepository.findByUsername( "chenchen" );
 
         System.out.println("---------------------->" + list.size() );
 

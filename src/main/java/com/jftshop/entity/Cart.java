@@ -44,11 +44,11 @@ public class Cart extends BaseEntity {
         this.member = member;
     }
 
+    @OneToMany(mappedBy="cart", fetch= FetchType.LAZY, cascade=CascadeType.ALL)
     public Set<CartItem> getCartItems() {
         return cartItems;
     }
 
-    @OneToMany(mappedBy="cart", fetch= FetchType.LAZY, cascade=CascadeType.ALL)
     public void setCartItems(Set<CartItem> cartItems) {
         this.cartItems = cartItems;
     }

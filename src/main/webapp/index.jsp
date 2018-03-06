@@ -6,7 +6,7 @@
 <%@ include file="/common/lte.jsp"%>
 
 
-<a href="<%=path%>/shop/register/index.jsp">注册</a>
+<a href="<%=path%>/shop/register/index.jsp">注册</a>&nbsp;&nbsp;<a href="<%=path%>/shop/login.jsp">登录</a>
 
 <br>
 <br>

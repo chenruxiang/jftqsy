@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
     public Member findByUsername(String username)
     {
         List<Member> list =  memberRepository.findByUsername( username );
-        return  list == null ? null : list.get(0);
+        return  list.size() == 0 ? null : list.get(0);
     }
 
     @Transactional(readOnly=true)
