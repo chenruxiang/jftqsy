@@ -25,7 +25,7 @@ public class Member extends  BaseEntity  {
     protected String phone;
     protected Cart cart;
 
-    protected static String PRINCIPAL_ATTRIBUTE_NAME = "PRINCIPAL_ATTRIBUTE_NAME";
+    public static String PRINCIPAL_ATTRIBUTE_NAME = "PRINCIPAL_ATTRIBUTE_NAME";
 
     @Id
     public String getId() {
