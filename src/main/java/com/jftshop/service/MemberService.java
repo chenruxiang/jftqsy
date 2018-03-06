@@ -12,4 +12,6 @@ public interface MemberService {
     public boolean usernameExists(String username);
 
     public Member findByUsername(String username);
+
+    public Member getCurrent();
 }

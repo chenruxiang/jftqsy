@@ -7,21 +7,20 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.Iterator" %>
 
-<!-- datatable导数-->
-<link rel="stylesheet" href="<%=path%>/common/css/product.css">
-
-
 <a href="<%=path%>">返回</a>
 
-<div class="productContent">
+<br>
+
+
 
 <%
 
+    Product product = null;
     Object object = request.getAttribute("product");
 
     if ( object != null ){
 
-        Product product = (Product)object;
+        product = (Product)object;
         String pi = product.getImage().replace("d:/upload/","");
         out.write("<img src='/productimg/"+pi+"' width='170' height='170'>");
         out.write("<br>");
@@ -33,31 +32,23 @@
         out.write("<br>规格---------------------------<br>");
         Iterator<ProductSpecification> iterator = product.getProductspecifications().iterator();
 
-        %>
-    <div class="action">
-        <div id="specification" class="specification clearfix">
-            <div class="title" style="display: none;">请选择商品规格</div>
-    <%
+        int count = 0;
+
         while (iterator.hasNext()){
             ProductSpecification productspecification = iterator.next();
-            out.write("<dt><span>");
+
             out.write(productspecification.getName());
-            out.write(":</span></dt>");
+            out.write(":");
             Iterator<ProductSpecificationValue> iterator2  = productspecification.getProductspecificationvalues().iterator();
             while (iterator2.hasNext()){
                 ProductSpecificationValue productspecificationvalue = iterator2.next();
-
-                out.write("<a href='javascript:;' class='text'>");
+                out.write("<input type='radio' name='ps"+count+"' value='"+productspecificationvalue.getId()+"'>");
                 out.write(productspecificationvalue.getName());
-                out.write("</a>");
+                out.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
             }
+            count++ ;
             out.write("<br>");
         }
-
-        //out.write("</a>");
-        out.write("<br>");
-
-
 
     }else{
 
@@ -66,32 +57,40 @@
 
 %>
 
-            </div>
+购买数量:<input type="text" id="quantity" name="quantity" value="1">件
 
-    <dl class="quantity">
-        <dt>购买数量:</dt>
-        <dd>
-            <input type="text" id="quantity" name="quantity" value="1" maxlength="4" onpaste="return false;">
-            <div>
-                <span id="increase" class="increase">&nbsp;</span>
-                <span id="decrease" class="decrease">&nbsp;</span>
-            </div>
-        </dd>
-        <dd>
-            件
-        </dd>
-    </dl>
+<br>
 
-
-</div>
-
-加入购物车
+<a href="void(0)" onclick="addCart()"  >加入购物车</a>
 
 <script type="text/javascript">
     $().ready(function() {
 
-        var $quantity = $("#quantity");
+
 
     });
+
+
+    // 加入购物车
+    function addCart() {
+
+
+        var quantity = $("#quantity").val();
+
+        if (/^\d*[1-9]\d*$/.test(quantity) && parseInt(quantity) > 0) {
+            $.ajax({
+                url: "<%=path%>/cart/add",
+                type: "POST",
+                data: {id: <%=product.getId()%>, quantity: quantity},
+                dataType: "json",
+                cache: false,
+                success: function(message) {
+                    $.message(message);
+                }
+            });
+        } else {
+            alert("数量输入数字");
+        }
+    }
 
 </script>

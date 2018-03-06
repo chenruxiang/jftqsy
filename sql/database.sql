@@ -226,6 +226,29 @@ CREATE TABLE `product_attribute_value` (
 alter table product_attribute_value comment '产品属性';
 
 
+CREATE TABLE `cart` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `cartkey` varchar(255) NOT NULL,
+  `memberid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table cart comment '购物车';
+
+CREATE TABLE `cart_item` (
+  `id` varchar(255) NOT NULL ,
+  `createdate` datetime NOT NULL default '0',
+  `modifydate` datetime DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `cartid` varchar(255) NOT NULL,
+  `productid` varchar(255) NOT NULL,
+  `productskuid` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table cart_item comment '购物车明细';
+
+
 
 
 
