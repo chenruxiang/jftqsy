@@ -4,10 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -18,7 +15,6 @@ import javax.validation.constraints.Pattern;
 @Table(name = "member")
 public class Member extends  BaseEntity  {
 
-
     protected String id;
     protected String username;
     protected String name;
@@ -27,6 +23,9 @@ public class Member extends  BaseEntity  {
     protected String email;
     protected String mobile;
     protected String phone;
+    protected Cart cart;
+
+    protected static String PRINCIPAL_ATTRIBUTE_NAME = "PRINCIPAL_ATTRIBUTE_NAME";
 
     @Id
     public String getId() {
@@ -104,5 +103,14 @@ public class Member extends  BaseEntity  {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @OneToOne(mappedBy = "member", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
